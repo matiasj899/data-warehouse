@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+}
+.nav-container{
+    background: #1D72C2;
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-container  h1{
+    font-family: 'Open Sans', sans-serif;
+    color: #ffff;
+    margin: 0;
+    margin-left: 30px;
+    
+}
+
