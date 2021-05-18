@@ -11,6 +11,7 @@ const user = require("../data-warehouse/src/routes/user");
 const region = require("../data-warehouse/src/routes/region");
 const pais = require("../data-warehouse/src/routes/pais");
 const ciudad = require("../data-warehouse/src/routes/Ciudad");
+const compania = require("../data-warehouse/src/routes/companias");
 const PORT = process.env.PORT || 5000;
 const server = app.listen(
   PORT,
@@ -32,6 +33,7 @@ app.use("/Data-Warehouse/User", user);
 app.use("/Data-Warehouse/Region", region);
 app.use("/Data-Warehouse/Pais", pais);
 app.use("/Data-Warehouse/Ciudad", ciudad);
+app.use("/Data-Warehouse/Compania", compania);
 
 //static
 
