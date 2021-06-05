@@ -1,0 +1,121 @@
+/*
+colores principales:
+azul:#1D72C2
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+.full-container {
+    height: 100%;
+}
+
+nav {
+    width: 100%;
+    height: 5em;
+    background-color: #1D72C2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-left: 30px;
+}
+
+.login-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container .login-box {
+    background-color: #1D72C2;
+    width: 60%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.login-container .login-box h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: xx-large;
+}
+
+.login-container .login-box .forms-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: 70%;
+    justify-content: center;
+}
+
+.forms-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.forms-container form input {
+    width: 300px;
+    height: 45px;
+    margin: 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    outline: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    
+}
+
+.forms-container form input[type=submit] {
+    border-radius: 5px;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    width: 45%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    background-color: #FFFFFF;
+    color: #555;
+    box-shadow: #555 1px;
+}
+
+.forms-container form input:focus {
+    border-radius: 5px;
+    -webkit-appearance: none;
+    outline: none;
+    border: 3px solid #555;
+    
+}
+
+.forms-container form input::placeholder {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
