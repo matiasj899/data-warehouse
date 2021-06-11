@@ -1,8 +1,10 @@
 /*
 colores principales:
 azul:#1D72C2
+ROJO: #de0028
 */
 
+/*ESTILOS HEADER LOGIN*/
 * {
     margin: 0;
     padding: 0;
@@ -28,6 +30,7 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
@@ -80,8 +83,7 @@ nav {
     flex-direction: column;
     align-items: flex-end;
 }
-
-.forms-container form input {
+.inputInitialStyle{
     width: 300px;
     height: 45px;
     margin: 20px;
@@ -91,8 +93,8 @@ nav {
     outline: none;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
-    
 }
+
 
 .forms-container form input[type=submit] {
     border-radius: 5px;
@@ -107,7 +109,7 @@ nav {
     box-shadow: #555 1px;
 }
 
-.forms-container form input:focus {
+.inputInitialStyle:focus {
     border-radius: 5px;
     -webkit-appearance: none;
     outline: none;
@@ -115,7 +117,45 @@ nav {
     
 }
 
-.forms-container form input::placeholder {
+.inputInitialStyle::placeholder {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
+}
+
+/*ESTILOS HEADER*/
+
+nav a{
+    text-decoration: none;
+    color: unset;
+    
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    height: 100%;
+    align-items: center;
+}
+nav ul li{
+    padding:  0px 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    border-bottom: 10px solid transparent;
+    
+}
+nav ul li:hover{
+   
+
+    border-bottom: 10px solid #FFFFFF;
+    
+}
+
+
+.inputInitialStyle.loginError{
+    border: 1px solid #de0028;
 }

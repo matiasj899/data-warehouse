@@ -50,8 +50,8 @@ const loginUser = async (req, res) => {
     email: email,
   });
   if (users == null) {
-    return res.status(400).json({
-      status: 400,
+    return res.status(401).json({
+      status: 401,
       mensaje: "Este usuario no se encuentra registrado.",
     });
   }
@@ -78,16 +78,17 @@ const loginUser = async (req, res) => {
             name: users.name,
             email: users.email,
             token,
+            admin:users.admin,
             mensaje: "Usuario logeado.",
           });
         }
-        return res.status(400).json({
-          status: 400,
+        return res.status(401).json({
+          status: 401,
           error: "bad credentials.",
         });
       } else {
-        return res.status(400).json({
-          status: 400,
+        return res.status(401).json({
+          status: 401,
           err,
           mensaje: "Contraseña incorrecta.",
         });

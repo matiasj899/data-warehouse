@@ -3,7 +3,7 @@ const route = express.Router();
 const {createUser,loginUser,userPage,updateUser,deleteUser}=require("../controllers/userController")
 const isAdmin=require("../middlewares/usersMiddlewares")
 
-route.get("/",userPage)
+route.get("/",isAdmin,userPage)
 route.post("/signup",isAdmin, createUser);
 route.post("/login", loginUser);
 route.put("/:id",isAdmin,updateUser);
