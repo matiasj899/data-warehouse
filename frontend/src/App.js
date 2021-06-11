@@ -4,7 +4,7 @@ import Login from "../src/components/Login";
 import Contactos from "../src/components/Contactos";
 import Usuarios from "../src/components/Usuarios";
 import Company from "../src/components/Company";
-import RegionCiudad from '../src/components/RegionCiudad'
+import RegionCiudad from "../src/components/RegionCiudad";
 
 function App() {
   return (

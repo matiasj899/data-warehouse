@@ -159,3 +159,11 @@ nav ul li:hover{
 .inputInitialStyle.loginError{
     border: 1px solid #de0028;
 }
+
+.error{
+    font-family: 'Open Sans', sans-serif;
+    font-size: small;
+    font-style: italic;
+    color: #F03738;
+    text-align: center;
+}

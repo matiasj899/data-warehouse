@@ -9,30 +9,29 @@ const Login = (props) => {
     password: "",
   });
 
-  const [className, setClassName] = useState("inputInitialStyle");
-
-  const[text,setText]=useState(false)
+  const [error, guardarError] = useState(false);
+  const [loginError, guardarloginError] = useState(false);
   //leer datos formulario
   const actualizarState = (e) => {
     setstate({
       ...state,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const actualizarClase = () => {
-    if (state === "") {
-      console.log("volviendo al estilo anterior");
-      setClassName("inputInitialStyle");
-    } else {
-      console.log("cambiando estilo");
-      setClassName("inputInitialStyle loginError");
+    if (state.email === "" || state.password === "") {
+      guardarloginError(false);
     }
   };
 
   //enviar peticion a la api
   const logUser = (e) => {
     e.preventDefault();
+    if (state.email === "" || state.password === "") {
+      guardarError(true);
+      guardarloginError(false);
+      return;
+    } else {
+      guardarError(false);
+    }
     clienteAxios
       .post("/User/login", state)
       .then((res) => {
@@ -43,9 +42,11 @@ const Login = (props) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         if (err) {
-          actualizarClase();
+          guardarloginError(true);
+          return;
+        } else {
+          guardarloginError(false);
         }
       });
   };
@@ -68,10 +69,10 @@ const Login = (props) => {
                   name="email"
                   placeholder="Email..."
                   onChange={actualizarState}
-                  className={className}
+                  className="inputInitialStyle"
                 />
               </label>
-              
+
               <label>
                 <input
                   type="password"
@@ -79,12 +80,21 @@ const Login = (props) => {
                   id="password"
                   placeholder="Contraseña..."
                   onChange={actualizarState}
-                  className={className}
+                  className="inputInitialStyle"
                 />
-                <p>Email o Contraseña incorrectos.</p>
+                {error ? (
+                  <p className="error">Todos los campos son obligatorios.</p>
+                ) : null}
+                {loginError ? (
+                  <p className="error">Usuario o contraseña incorrectos.</p>
+                ) : null}
               </label>
-              
-              <input type="submit" value="INGRESAR" />
+
+              <input
+                type="submit"
+                value="INGRESAR"
+                className="inputInitialStyle"
+              />
             </form>
           </div>
         </div>
