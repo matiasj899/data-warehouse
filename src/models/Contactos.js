@@ -9,7 +9,7 @@ const ContactosSchema = new mongoose.Schema({
   compañia: [{ type: Schema.Types.ObjectId, ref: "Compania" }],
   region: [{ type: Schema.Types.ObjectId, ref: "Region" }],
   pais: [{ type: Schema.Types.ObjectId, ref: "Pais" }],
-  ciudad: [{ type: Schema.Types.ObjectId, ref: "Pais" }],
+  ciudad: [{ type: Schema.Types.ObjectId, ref: "Ciudad" }],
   direccion: { type: String, required: true },
   interes: { type: Number, required: true },
   canal: [

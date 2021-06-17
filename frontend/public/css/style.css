@@ -5,6 +5,7 @@ ROJO: #de0028
 */
 
 /*ESTILOS HEADER LOGIN*/
+
 * {
     margin: 0;
     padding: 0;
@@ -37,7 +38,8 @@ nav {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     color: #FFFFFF;
-    margin-left: 30px;
+    margin-left: 20px;
+    font-size: xx-large;
 }
 
 .login-container {
@@ -83,18 +85,18 @@ nav {
     flex-direction: column;
     align-items: flex-end;
 }
-.inputInitialStyle{
+
+.inputInitialStyle {
     width: 300px;
     height: 45px;
     margin: 20px;
-    border: 1px solid grey;
+    border: 1px solid rgba(0, 0, 0, 0.10);
     border-radius: 5px;
     -webkit-appearance: none;
     outline: none;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
 }
-
 
 .forms-container form input[type=submit] {
     border-radius: 5px;
@@ -114,7 +116,6 @@ nav {
     -webkit-appearance: none;
     outline: none;
     border: 3px solid #555;
-    
 }
 
 .inputInitialStyle::placeholder {
@@ -124,20 +125,20 @@ nav {
 
 /*ESTILOS HEADER*/
 
-nav a{
+nav a {
     text-decoration: none;
     color: unset;
-    
 }
 
-nav ul{
+nav ul {
     display: flex;
     list-style: none;
     height: 100%;
     align-items: center;
 }
-nav ul li{
-    padding:  0px 10px;
+
+nav ul li {
+    padding: 0px 10px;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     color: #FFFFFF;
@@ -146,24 +147,245 @@ nav ul li{
     align-items: center;
     height: 100%;
     border-bottom: 10px solid transparent;
-    
 }
-nav ul li:hover{
-   
 
+nav ul li:hover {
     border-bottom: 10px solid #FFFFFF;
-    
 }
 
-
-.inputInitialStyle.loginError{
+.inputInitialStyle.loginError {
     border: 1px solid #de0028;
 }
 
-.error{
+.logo.contacts-title {
+    color: #000000;
+    margin: 20px;
+    font-size: x-large;
+}
+
+.inputInitialStyle.add-btn {
+    width: 200px;
+    background-color: #1D72C2;
+    color: #FFFFFF;
+    border: unset;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.inputInitialStyle.add-btn:hover {
+    background-color: #145591;
+}
+
+.inputInitialStyle.search-bar {
+    width: 500px;
+    margin: 20px 5px 20px 20px;
+}
+
+.inputInitialStyle.search-btn {
+    width: 41px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    border-radius: 3.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: unset;
+}
+
+.search-img {
+    background-image: url(../search-solid.svg);
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.error {
     font-family: 'Open Sans', sans-serif;
     font-size: small;
     font-style: italic;
     color: #F03738;
     text-align: center;
 }
+
+.search-and-add {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-and-add form {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 50px;
+}
+
+.list:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.list.first-row {
+    border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.list.first-row:hover {
+    background-color: transparent;
+}
+
+.ul-Container {
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+    -webkit-appearance: none;
+    outline: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: x-small;
+    margin: 20px;
+}
+
+.ul-Container .list label {
+    width: 54px;
+}
+
+.ul-Container .list .name-email-cn {
+    width: 250px;
+}
+
+.ul-Container .list .country-region-cn, .company-cn, .position-cn, .interest-cn {
+    width: 186px;
+}
+
+.ul-Container .list .actions-cn {
+    width: 86px;
+}
+
+.ul-Container .list .actions-cn li {
+    list-style: none;
+}
+
+.ul-Container .list .interest-cn.margin-bar h2 {
+    width: 20%;
+}
+
+.contacts-p {
+    color: rgba(0, 0, 0, 0.50);
+}
+
+.interest-cn {
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    align-items: center;
+}
+
+.progress-bar-container {
+    background: #DDDDDD;
+    width: 50%;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.progress-bar.interest-0 {
+    width: 0%;
+    background: #DDDDDD;
+}
+
+.progress-bar.interest-25 {
+    width: 25%;
+    background: #1CC1F5;
+}
+
+.progress-bar.interest-50 {
+    width: 50%;
+    background: #FFC700;
+}
+
+.progress-bar.interest-75 {
+    width: 75%;
+    background: #FF6F00;
+}
+
+.progress-bar.interest-100 {
+    width: 100%;
+    background: #DE0028;
+}
+
+.modal-container {
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    
+}
+
+.modal-content {
+    background-color: #fefefe;
+    
+    /* 15% from the top and centered */
+    
+    border: 1px solid #888;
+    width: 80%;
+    height: 500px;
+    
+}
+.modal-content .modal-contact-and-btn-cn {
+    background-color: #1D72C2;
+    display: flex;
+    flex-direction: column;
+}
+.modal-content .modal-contact-and-btn {
+    display: flex;
+    margin: 20px;
+    justify-content: space-between;
+    background-color: #1D72C2;
+    
+}
+.modal-content .modal-contact-and-btn h1{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: medium;
+
+}
+.modal-content .modal-contact-and-btn button{
+    background-color: transparent;
+    width: 10px;
+    height: 10px;
+
+}
+.modal-content .modal-contact-and-btn .cross-img{
+    background-image: url(../times-solid.svg);
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+}
+
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = (adminValue) => {
   if (adminValue.adminValue === true) {
@@ -11,13 +11,19 @@ const Header = (adminValue) => {
           </Link>
           <ul>
             <li>
-              <Link to="/Contactos">Contactos</Link>
+              <NavLink to="/Contactos">
+                Contactos
+              </NavLink>
             </li>
             <li>
-              <Link to='/Usuarios'>Usuarios</Link></li>
+              <Link to="/Usuarios">Usuarios</Link>
+            </li>
             <li>
-            <Link to="/Company">Compañias</Link></li>
-            <li><Link to="/Region-Ciudad">Region/Ciudad</Link></li>
+              <Link to="/Company">Compañias</Link>
+            </li>
+            <li>
+              <Link to="/Region-Ciudad">Region/Ciudad</Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -34,8 +40,11 @@ const Header = (adminValue) => {
               <Link to="/Contactos">Contactos</Link>
             </li>
             <li>
-            <Link to="/Company">Compañias</Link></li>
-            <li><Link to="/Region-Ciudad">Region/Ciudad</Link></li>
+              <Link to="/Company">Compañias</Link>
+            </li>
+            <li>
+              <Link to="/Region-Ciudad">Region/Ciudad</Link>
+            </li>
           </ul>
         </nav>
       </div>

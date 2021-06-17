@@ -3,7 +3,11 @@ const contactosServices = require("../services/contactosServices");
 
 const verContactos = async (req, res) => {
   try {
-    const buscarContactos = await Contactos.find();
+    const buscarContactos = await Contactos.find()
+      .populate("ciudad")
+      .populate("compañia")
+      .populate("region")
+      .populate("pais", "nombre");
     if (buscarContactos.length > 0) {
       res.status(200).json({
         status: 200,
