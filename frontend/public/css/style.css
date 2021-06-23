@@ -148,6 +148,15 @@ nav ul li {
     height: 100%;
     border-bottom: 10px solid transparent;
 }
+nav ul li .logOut-btn{
+    
+        font-family: 'Open Sans', sans-serif;
+        font-weight: bold;
+        color: #FFFFFF;
+        
+        background-color: unset;
+        
+}
 
 nav ul li:hover {
     border-bottom: 10px solid #FFFFFF;
@@ -357,6 +366,8 @@ nav ul li:hover {
 .modal-content .modal-contact-and-btn-cn {
     background-color: #1D72C2;
     display: flex;
+    height: 25%;
+    position: relative;
     flex-direction: column;
 }
 .modal-content .modal-contact-and-btn {
@@ -364,7 +375,9 @@ nav ul li:hover {
     margin: 20px;
     justify-content: space-between;
     background-color: #1D72C2;
+
     
+
 }
 .modal-content .modal-contact-and-btn h1{
     font-family: 'Open Sans', sans-serif;
@@ -387,5 +400,64 @@ nav ul li:hover {
     cursor: pointer;
 
 }
+.modal-content .modal-contact-and-btn-cn .new-contact-cn{
+    WIDTH: 96%;
+    HEIGHT: 130px;
+    border: 3px solid #0683F9;
+    TOP: 50%;
+    border-radius: 5px;
+    POSITION: ABSOLUTE;
+    left: 20px;
+    display: flex;
+    BACKGROUND: WHITE;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+.modal-content .extra-div{
+    height: 20%;
+    width: 100%;
+}
 
+.new-contact-cn form{
+    display: flex;
+}
+.new-contact-cn form div{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.new-contact-cn form div label{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    
+    font-size:small
+}
+.new-contact-cn form div label span{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #de0028;
+    
+    font-size:small
+}
+.new-contact-cn form div .inputInitialStyle.newContact{
+    width: 190px;
+    height: 35px;
+    margin: unset;
+    
+    
+}
 
+.new-contact-info-cn form{
+    display: flex;
+}
+.new-contact-info-cn form div{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.new-contact-info-cn form div .inputInitialStyle.newContact{
+    width: 190px;
+    height: 35px;
+    margin: unset;
+}

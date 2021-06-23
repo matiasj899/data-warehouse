@@ -3,11 +3,14 @@ import Header from "./Header";
 import clienteAxios from "../config/axios";
 import ListOfContacts from "./listOfContacts";
 import NewContact from "./NewContactModal"
+import { Link, NavLink, Redirect } from "react-router-dom";
+import useUser from "../hooks/useUser";
 
-const Contactos = (props) => {
-  const isAdmin = props.location.state.admin;
+const Contactos = () => {
+  const isAdmin =  window.sessionStorage.getItem("admin");
   const [contactos, setcontactos] = useState([]);
   const [modal,setModal]=useState(false)
+  const { isLogged, logOut } = useUser();
 
   useEffect(() => {
     console.log("desde use effect");
@@ -27,6 +30,7 @@ const Contactos = (props) => {
   function showModal(){
     setModal(true)
   }
+  
   return (
     <div>
       <Header adminValue={isAdmin} />
