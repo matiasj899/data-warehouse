@@ -6,6 +6,7 @@ import Usuarios from "../src/components/Usuarios";
 import Company from "../src/components/Company";
 import RegionCiudad from "../src/components/RegionCiudad";
 import { UserContextProvider } from "./context/LoginContext";
+import DeleteModal from "./components/DeleteModal";
 function App() {
   return (
     <UserContextProvider>
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/Contactos" component={Contactos} />
           <Route exact path="/Usuarios" component={Usuarios} />
+          <Route exact path="/Usuarios/:id" component={DeleteModal} />
           <Route exact path="/Compañias" component={Company} />
           <Route exact path="/Region-Ciudad" component={RegionCiudad} />
         </Switch>

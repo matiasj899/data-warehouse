@@ -1,64 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
-
-const Usuarios = () => {
+import UsuariosForm from "./UsuariosForm";
+import clienteAxios from "../config/axios";
+import AllUsers from "./AllUsers";
+const Usuarios = (props) => {
+  console.log(props);
+  const [users, setUsers] = useState([]);
+  const jwt = window.sessionStorage.getItem("jwt");
+  console.log(jwt);
+  const axiosConfig = {
+    headers: {
+      Authorization: "Bearer " + jwt,
+    },
+  };
+  useEffect(() => {
+    clienteAxios
+      .get("/User", axiosConfig)
+      .then((res) => {
+        setUsers(res.data.usuarios);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(users);
+  const userData = users.map((user) => (
+    <AllUsers key={user._id} user={user} props={props} />
+  ));
   return (
     <div>
       <Header></Header>
-      <div className="login-container">
-        <div className="login-box">
-          <h2>Crear usuario</h2>
-          <div className="forms-container">
-            <form>
-              <label htmlFor="name">
-                Nombre
-                <input type="text" name="name" className="inputInitialStyle" />
-              </label>
-              <label htmlFor="apellido">
-                Apellido
-                <input
-                  type="text"
-                  name="apellido"
-                  className="inputInitialStyle"
-                />
-              </label>
-              <label htmlFor="email">
-                E-mail
-                <input
-                  type="email"
-                  name="email"
-                  className="inputInitialStyle"
-                />
-              </label>
 
-              <label htmlFor="password">
-                Contraseña
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  className="inputInitialStyle"
-                />
-              </label>
-              <label htmlFor="repetir-password">
-                Repetir contraseña
-                <input
-                  type="password"
-                  name="repetir-password"
-                  id="repetir-password"
-                  className="inputInitialStyle"
-                />
-              </label>
-
-              <input
-                type="submit"
-                value="CREAR"
-                className="inputInitialStyle"
-              />
-            </form>
+      <ul className="ul-Container">
+        <li className="users-li">
+          <h2>Usuarios</h2>
+        </li>
+        <li className="list first-row">
+          <label>
+            <input type="checkbox"></input>
+          </label>
+          <div className="name-email-cn user">
+            <h2>Nombre</h2>
           </div>
-        </div>
-      </div>
+          <div className="company-cn user">
+            <h2>Apellido</h2>
+          </div>
+          <div className="position-cn user">
+            <h2>Email</h2>
+          </div>
+          <div className="actions-cn">
+            <h2>Acciones</h2>
+          </div>
+        </li>
+        {userData}
+      </ul>
+      <UsuariosForm axiosConfig={axiosConfig}></UsuariosForm>
     </div>
   );
 };

@@ -3,8 +3,27 @@ const saltRounds = 10;
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
-const userPage = (req, res) => {
-  res.send("Pagina usuario");
+const getUsers = async(req, res) => {
+  try {
+    const usuarios=await User.find();
+    if(usuarios){
+      res.status(200).json({
+        status:200,
+        usuarios,
+        msj:"Devolviendo usuarios"
+      })
+    }else{
+      res.status(400).json({
+        status:400,
+        msj:"No se ha podido procesar la peticion."
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      status:400,
+      error
+    })
+  }
 };
 const createUser = async (req, res) => {
   try {
@@ -155,4 +174,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { userPage, createUser, loginUser, updateUser, deleteUser };
+module.exports = { getUsers, createUser, loginUser, updateUser, deleteUser };
