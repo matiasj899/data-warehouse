@@ -4,10 +4,14 @@ import UsuariosForm from "./UsuariosForm";
 import clienteAxios from "../config/axios";
 import AllUsers from "./AllUsers";
 const Usuarios = (props) => {
+  let array = [];
   console.log(props);
   const [users, setUsers] = useState([]);
+  const [count, setCount] = useState([]);
+  const [selected, setSelected] = useState(false);
   const jwt = window.sessionStorage.getItem("jwt");
   console.log(jwt);
+
   const axiosConfig = {
     headers: {
       Authorization: "Bearer " + jwt,
@@ -21,13 +25,39 @@ const Usuarios = (props) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(users);
+
+  const [allCheckbox, setAllCheckbox] = useState(false);
+  function handleClick(e) {
+    setAllCheckbox(!allCheckbox);
+    const numberOfUsers = users.map((number) => {
+      array.push(number._id);
+    });
+    console.log(array);
+    setCount(array.length);
+    setSelected(!selected);
+  }
+
   const userData = users.map((user) => (
-    <AllUsers key={user._id} user={user} props={props} />
+    <AllUsers
+      key={user._id}
+      user={user}
+      props={props}
+      allCheckbox={allCheckbox}
+    />
   ));
+
   return (
     <div>
       <Header></Header>
+      {selected ? (
+        <div className="select-and-delete">
+          <div className="selected-items-cn">
+            <p className="selected-items-p">{count} seleccionados</p>
+            
+          </div>
+          <button className="selected-items-p">Eliminar contactos</button>
+        </div>
+      ) : null}
 
       <ul className="ul-Container">
         <li className="users-li">
@@ -35,7 +65,11 @@ const Usuarios = (props) => {
         </li>
         <li className="list first-row">
           <label>
-            <input type="checkbox"></input>
+            <input
+              type="checkbox"
+              onChange={handleClick}
+              checked={allCheckbox}
+            ></input>
           </label>
           <div className="name-email-cn user">
             <h2>Nombre</h2>

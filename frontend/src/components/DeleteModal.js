@@ -2,7 +2,7 @@ import React from "react";
 import clienteAxios from "../config/axios";
 import Header from "./Header";
 import Usuarios from "./Usuarios";
-import DeleteIcon from "./DeleteIcon";
+
 
 
 const DeleteModal = (props) => {
@@ -24,15 +24,24 @@ const DeleteModal = (props) => {
       })
       .catch((error) => console.log(error));
   }
+  function closeModal(e){
+    props.history.push(`/Usuarios/`)
+  }
   return (
       <>
 <Usuarios></Usuarios>
     <div className="modal-container">
       <div className="modal-content delete">
-          <DeleteIcon></DeleteIcon>
-        <h2>Seguro desear eliminar a este usuario?</h2>
-        <button>Cancelar</button>
-        <button onClick={handleClick}>Eliminar</button>
+          <div className="delete-icon-cn">
+          <div className='delete-icon'></div>
+          </div>
+          
+        <h2>¿Seguro que deseas eliminar los usuarios seleccionados?</h2>
+        <div className="btn-cn">
+        <button className="cancel-btn" onClick={closeModal}>Cancelar</button>
+        <button className="delete-btn" onClick={handleClick}>Eliminar</button>
+        </div>
+        
       </div>
     </div>
     </>

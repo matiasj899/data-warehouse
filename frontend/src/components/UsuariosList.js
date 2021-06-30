@@ -20,11 +20,9 @@ const UsuariosList = () => {
   }, []);
   console.log(users);
   const userData = users.map((user) => {
-    <AllUsers key={user._id} user={user}></AllUsers>
+    <AllUsers key={user._id} user={user}></AllUsers>;
   });
-  
-  return(
-      null
-  )
+
+  return null;
 };
 export default UsuariosList;

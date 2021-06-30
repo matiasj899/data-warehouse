@@ -242,6 +242,9 @@ nav ul li:hover {
 .list:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
+.list.active{
+    background-color: #e6f2fe;
+}
 
 .list.first-row {
     border: 1px solid rgba(0, 0, 0, 0.10);
@@ -375,11 +378,68 @@ nav ul li:hover {
     border: 1px solid #888;
     width: 300px;
     height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 2px;
 }
 .modal-content.delete h2{
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
-    font-size: small
+    font-size: small;
+    text-align: center;
+}
+.modal-content .delete-icon-cn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    
+}
+.modal-content .delete-icon-cn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    
+}
+.modal-content.delete .btn-cn{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.modal-content.delete .btn-cn button{
+    height: 42px;
+    width: 130px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: medium;
+    
+}
+.modal-content.delete .btn-cn .cancel-btn{
+    background-color: transparent;
+    border: 1px solid #0683F9;
+    border-radius: 2px;
+    color: #0683F9;
+
+     
+ }
+.modal-content.delete .btn-cn .delete-btn{
+   background-color: #de0028;
+   border-radius: 2px;
+   color: #FFFFFF;
+}
+.modal-content .delete-icon-cn .delete-icon{
+    background-image: url(/eliminar-contactos.png);
+    background-repeat: no-repeat;
+    width: 80px;
+    background-size: 100%;
+    margin: 30px;
+    height: 80px;
+    
 }
 .modal-content .modal-contact-and-btn-cn {
     background-color: #1D72C2;
@@ -551,6 +611,7 @@ nav ul li:hover {
     flex-direction: row;
     margin: unset;
     align-items: center;
+    width: 200px;
 }
 
 .save-and-cancel-cn {
@@ -588,4 +649,40 @@ nav ul li:hover {
     justify-content: center;
     color: white;
     height: 40px;
+}
+.select-and-delete{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.select-and-delete button{
+    width: 150px;
+    height: 30px;
+    background: transparent;
+    cursor: pointer;
+}
+.select-and-delete .selected-items-p{
+    color:#1D72C2;
+    font-family: 'Open Sans', sans-serif;
+    margin: 20px;
+    
+}
+.selected-items-cn{
+    background-color: #e6f2fe;
+    border-radius: 4px;
+    width: 150px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+.selected-items-cn .selected-items-p{
+    color:#1D72C2;
+    font-family: 'Open Sans', sans-serif;
+    margin: unset;
+}
+
+.hiddenDiv{
+    display: none;
 }
