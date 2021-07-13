@@ -896,3 +896,7 @@ background-color: #C6CACC;
 .cancel-btn,.save-btn{
    cursor: pointer; 
 }
+.save-btn{
+    background-color: #1D72C2;
+    color: #fefefe;
+}

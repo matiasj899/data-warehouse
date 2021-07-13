@@ -89,10 +89,10 @@ const NewContact = ({ modal, setModal }) => {
   function channelForm(e) {
     setContact({
       ...contact,
-      contacto:{
+      contacto: {
         ...contact.contacto,
-        [e.target.name]:e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   }
 
@@ -125,7 +125,15 @@ const NewContact = ({ modal, setModal }) => {
       </option>
     );
   });
-
+  function newContactReq() {
+    clienteAxios
+      .post("/Contactos", contact)
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <div className="modal-container">
       <div className="modal-content">
@@ -292,7 +300,7 @@ const NewContact = ({ modal, setModal }) => {
           </form>
         </div>
         <div className="new-contact-info-cn">
-          <form className='channel-form'>
+          <form className="channel-form">
             <div>
               <label forhtml="CanalDeContacto">Canal de contacto</label>
               <select
@@ -318,8 +326,12 @@ const NewContact = ({ modal, setModal }) => {
             </div>
             <div>
               <label forhtml="Preferencias">Preferencias</label>
-              <select className="inputInitialStyle newContact" onChange={channelForm} name="preferencia">
-              <option value="" selected="true" disabled="disabled">
+              <select
+                className="inputInitialStyle newContact"
+                onChange={channelForm}
+                name="preferencia"
+              >
+                <option value="" selected="true" disabled="disabled">
                   Selecciona una preferencia
                 </option>
                 <option value="sin preferencia">Sin preferencia</option>
@@ -327,13 +339,14 @@ const NewContact = ({ modal, setModal }) => {
                 <option value="no molestar">No molestar</option>
               </select>
             </div>
-            
           </form>
         </div>
         <div className="save-and-cancel-cn">
           <div className="btn-cn">
             <button className="cancel-btn">Cancelar</button>
-            <button className="save-btn">Guardar contacto</button>
+            <button className="save-btn" onClick={newContactReq}>
+              Guardar contacto
+            </button>
           </div>
         </div>
       </div>

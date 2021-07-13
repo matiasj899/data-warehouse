@@ -1,7 +1,7 @@
 import React from "react";
 
 const ListOfContacts = ({ contacto }) => {
-  console.log(contacto);
+ 
   return (
     <li className="list">
       <label>

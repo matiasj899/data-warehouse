@@ -5,10 +5,12 @@ import clienteAxios from "../config/axios";
 import NewContact from "./NewContactModal";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import useUser from "../hooks/useUser";
+import ListOfContacts from "./listOfContacts";
 
 const Contactos = () => {
   const isAdmin = window.sessionStorage.getItem("admin");
   const [contactos, setcontactos] = useState([]);
+  const [result,setResult]=useState(contactos)
   const [noContacts, setNoContacts] = useState(false);
   const [modal, setModal] = useState(false);
   const { isLogged, logOut } = useUser();
@@ -18,25 +20,35 @@ const Contactos = () => {
     clienteAxios
       .get("/Contactos")
       .then((res) => {
-        console.log(res);
+
         setcontactos(res.data.buscarContactos);
+        setResult(res.data.buscarContactos)
       })
       .catch((err) => {
-        console.log(err);
+       
         if (err) {
           setNoContacts(true);
         }
       });
   }, []);
 
-  /* const listaContactos = contactos.map((contacto) => (
+   const listaContactos = contactos.map((contacto) => (
     <ListOfContacts key={contacto._id} contacto={contacto} />
-  ));*/
+  ));
 
   function showModal() {
     setModal(true);
   }
-
+  function searcher(e){
+    let value=e.target.value
+  let find=[]
+  console.log(value)
+  find=result.filter((eachResult)=>{
+   return eachResult.nombre===e.target.value
+  })
+  setcontactos(find)
+  }
+console.log(result)
   return (
     <div>
       <Header adminValue={isAdmin} />
@@ -48,6 +60,7 @@ const Contactos = () => {
               type="search"
               id="contacts-search"
               className="inputInitialStyle search-bar"
+              onChange={searcher}
             ></input>
           </label>
           <button className="inputInitialStyle search-btn">
@@ -88,7 +101,11 @@ const Contactos = () => {
           <h2>Acciones</h2>
         </div>
       </li>
-    </ul>}
+      {listaContactos}
+    </ul>
+    }
+   
+
     </div>
   );
 };
