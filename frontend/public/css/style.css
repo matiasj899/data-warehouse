@@ -888,3 +888,11 @@ nav ul li:hover {
 .inputInitialStyle.newContact.disable:disabled{
 background-color: #C6CACC;
 }
+.new-contact-info-cn .channel-form{
+    display: flex;
+    width: 98%;
+    justify-content: flex-start;
+}
+.cancel-btn,.save-btn{
+   cursor: pointer; 
+}

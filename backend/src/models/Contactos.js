@@ -12,6 +12,13 @@ const ContactosSchema = new mongoose.Schema({
   ciudad: [{ type: Schema.Types.ObjectId, ref: "Ciudad" }],
   direccion: { type: String, required: true },
   interes: { type: String, required: true },
+  contacto:[
+    {
+        canal: { type: String },
+        cuenta: { type: String },
+        preferencia: { type: String }
+    }
+]
 });
 
 module.exports = mongoose.model("Contactos", ContactosSchema);
