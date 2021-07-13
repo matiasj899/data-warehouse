@@ -5,12 +5,13 @@ import clienteAxios from "../config/axios";
 import AllUsers from "./AllUsers";
 const Usuarios = (props) => {
   let array = [];
-  console.log(props);
+
   const [users, setUsers] = useState([]);
   const [count, setCount] = useState([]);
+  const [deleteArray, setdeleteArray] = useState([]);
   const [selected, setSelected] = useState(false);
   const jwt = window.sessionStorage.getItem("jwt");
-  console.log(jwt);
+  const [allCheckbox, setAllCheckbox] = useState(false);
 
   const axiosConfig = {
     headers: {
@@ -21,20 +22,29 @@ const Usuarios = (props) => {
     clienteAxios
       .get("/User", axiosConfig)
       .then((res) => {
-        setUsers(res.data.usuarios);
+        const data = res.data.usuarios.filter(
+          (usuario) => usuario.admin != true
+        );
+        setUsers(data);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const [allCheckbox, setAllCheckbox] = useState(false);
   function handleClick(e) {
     setAllCheckbox(!allCheckbox);
     const numberOfUsers = users.map((number) => {
       array.push(number._id);
+      setdeleteArray(array);
     });
-    console.log(array);
     setCount(array.length);
     setSelected(!selected);
+    if (allCheckbox === true) {
+      setCount(null);
+    }
+  }
+  function deleteUser(e) {
+    const jsonArray = JSON.stringify(deleteArray);
+    props.history.push(`/Usuarios/${jsonArray}`);
   }
 
   const userData = users.map((user) => (
@@ -53,9 +63,10 @@ const Usuarios = (props) => {
         <div className="select-and-delete">
           <div className="selected-items-cn">
             <p className="selected-items-p">{count} seleccionados</p>
-            
           </div>
-          <button className="selected-items-p">Eliminar contactos</button>
+          <button className="selected-items-p" onClick={deleteUser}>
+            Eliminar contactos
+          </button>
         </div>
       ) : null}
 

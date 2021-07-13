@@ -6,7 +6,9 @@ import Usuarios from "./Usuarios";
 
 
 const DeleteModal = (props) => {
+  console.log(props)
     const userId=props.match.params.id
+    console.log(userId)
   const jwt = window.sessionStorage.getItem("jwt");
   const axiosConfig = {
     headers: {

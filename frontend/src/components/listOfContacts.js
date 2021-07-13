@@ -24,19 +24,19 @@ const ListOfContacts = ({ contacto }) => {
       <div className="interest-cn margin-bar">
         <h2>{contacto.interes}%</h2>
         <div className="progress-bar-container">
-          {contacto.interes === 100 ? (
+          {contacto.interes === "100" ? (
             <div className="progress-bar interest-100"></div>
           ) : null}
-          {contacto.interes === 75 ? (
+          {contacto.interes === "75" ? (
             <div className="progress-bar interest-75"></div>
           ) : null}
-          {contacto.interes === 50 ? (
+          {contacto.interes === "50" ? (
             <div className="progress-bar interest-50"></div>
           ) : null}
-          {contacto.interes === 25 ? (
+          {contacto.interes === "25" ? (
             <div className="progress-bar interest-25"></div>
           ) : null}
-          {contacto.interes === 0 ? (
+          {contacto.interes === "0" ? (
             <div className="progress-bar interest-0"></div>
           ) : null}
         </div>

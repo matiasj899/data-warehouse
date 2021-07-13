@@ -3,20 +3,17 @@ import clienteAxios from "../config/axios";
 const UsuariosForm = ({ axiosConfig }) => {
   const [error, guardarError] = useState(false);
   const [loginError, guardarloginError] = useState(false);
+  const [repeatPassword, setrepeatPassword] = useState("");
+  const [passwordError, setpasswordError] = useState(false);
 
-  
   const [newUser, setNewUser] = useState({
     nombre: "",
     apellido: "",
     email: "",
     password: "",
-    admin:false
-    
+    admin: false,
   });
-  
-  
 
-  
   function actualizarState(e) {
     setNewUser({
       ...newUser,
@@ -24,27 +21,40 @@ const UsuariosForm = ({ axiosConfig }) => {
     });
   }
   function actualizarAdmin(e) {
-    
-    console.log(e.target.value)
-    if(e.target.value==="true"){
-      newUser.admin=true
+    console.log(e.target.value);
+    if (e.target.value === "true") {
+      newUser.admin = true;
     }
   }
-console.log(newUser)
+  function secondPassword(e) {
+    setrepeatPassword(e.target.value);
+  }
+  console.log(newUser);
   function handleClick(e) {
     e.preventDefault();
-    if (newUser.nombre === ""|| newUser.apelido === "" || newUser.email === "" || newUser.password === "") {
+    if (
+      newUser.nombre === "" ||
+      newUser.apelido === "" ||
+      newUser.email === "" ||
+      newUser.password === ""
+    ) {
       guardarError(true);
       guardarloginError(false);
       return;
     } else {
       guardarError(false);
     }
+    if (newUser.password !== repeatPassword) {
+      setpasswordError(true);
+      return;
+    } else {
+      setpasswordError(false);
+    }
     clienteAxios
       .post("/User/signup", newUser, axiosConfig)
       .then((res) => {
-        if(res.status==200){
-          window.location.reload()
+        if (res.status == 200) {
+          window.location.reload();
         }
       })
       .catch((error) => console.log(error));
@@ -101,7 +111,11 @@ console.log(newUser)
                   name="repetir-password"
                   id="repetir-password"
                   className="inputInitialStyle"
+                  onChange={secondPassword}
                 />
+                {passwordError ? (
+                  <p className="error">Las contraseñas no coinciden.</p>
+                ) : null}
               </label>
               <label htmlFor="admin">
                 Administrador
@@ -118,7 +132,7 @@ console.log(newUser)
                   <p className="error">Todos los campos son obligatorios.</p>
                 ) : null}
               </label>
-            
+
               <input
                 type="submit"
                 value="CREAR"

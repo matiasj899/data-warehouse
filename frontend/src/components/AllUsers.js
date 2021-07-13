@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-const AllUsers = ({ user, props, allCheckbox }) => {
+const AllUsers = ({ user, props, allCheckbox, eliminarArray }) => {
+  let array = [];
   useEffect(() => {
     handleClick();
   }, [allCheckbox]);
+
   const [active, setActive] = useState("list");
-  const [hidden,setHidden]=useState('hiddenDiv')
+  const [hidden, setHidden] = useState("hiddenDiv");
+  const [dot, setDot] = useState("dot-icon");
   const [count, setCount] = useState([]);
   const [checkbox, setCheckbox] = useState(true);
+
   function handleClick() {
     setCheckbox(!checkbox);
+
     if (checkbox === false) {
       setActive("list active");
     } else {
@@ -18,14 +23,22 @@ const AllUsers = ({ user, props, allCheckbox }) => {
   }
 
   function deleteUser(e) {
-    props.history.push(`/Usuarios/${user._id}`);
+    array.push(user._id);
+    const jsonArray = JSON.stringify(array);
+    props.history.push(`/Usuarios/${jsonArray}`);
   }
-  function showHiddenDiv(){
-    setHidden('')
+
+  function hover() {
+    setHidden("");
+    setDot("dot-icon hidden");
+  }
+  function endHover() {
+    setHidden("hiddenDiv");
+    setDot("dot-icon");
   }
   return (
     <>
-      <li className={active}>
+      <li className={active} onMouseEnter={hover} onMouseLeave={endHover}>
         <label>
           <input
             type="checkbox"
@@ -45,16 +58,15 @@ const AllUsers = ({ user, props, allCheckbox }) => {
         <div className="actions-cn">
           <ul>
             <div>
-              <button onClick={showHiddenDiv}>...</button>
+              <div className={dot}></div>
               <div className={hidden}>
-                <li onClick={deleteUser}>Delete</li>
-                <li>Update</li>
+                <button onClick={deleteUser} className="trash-icon"></button>
+                <button className="update-icon"></button>
               </div>
             </div>
           </ul>
         </div>
       </li>
-      <h2>{count}</h2>
     </>
   );
 };

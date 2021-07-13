@@ -242,8 +242,38 @@ nav ul li:hover {
 .list:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
-.list.active{
+
+.dot-icon {
+    background-image: url(../ellipsis-h-solid.svg);
+    background-color: unset;
+    width: 20px;
+    height: 20px;
+}
+
+.dot-icon.hidden {
+    display: none;
+}
+
+.list.active {
     background-color: #e6f2fe;
+}
+
+.trash-icon {
+    background: url(../trash-solid.svg) no-repeat;
+    background-color: unset;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.update-icon {
+    background: url(../pencil-alt-solid.svg) no-repeat;
+    background-color: unset;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    margin: 10px;
 }
 
 .list.first-row {
@@ -283,6 +313,8 @@ nav ul li:hover {
 
 .ul-Container .list .actions-cn {
     width: 86px;
+    display: flex;
+    justify-content: center;
 }
 
 .ul-Container .list .actions-cn li {
@@ -372,7 +404,7 @@ nav ul li:hover {
     height: 500px;
 }
 
-.modal-content.delete{
+.modal-content.delete {
     background-color: #fefefe;
     /* 15% from the top and centered */
     border: 1px solid #888;
@@ -384,32 +416,35 @@ nav ul li:hover {
     justify-content: space-evenly;
     border-radius: 2px;
 }
-.modal-content.delete h2{
+
+.modal-content.delete h2 {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: small;
     text-align: center;
 }
+
 .modal-content .delete-icon-cn {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-content: center;
-    
 }
+
 .modal-content .delete-icon-cn {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-content: center;
-    
 }
-.modal-content.delete .btn-cn{
+
+.modal-content.delete .btn-cn {
     display: flex;
     width: 100%;
     justify-content: space-around;
 }
-.modal-content.delete .btn-cn button{
+
+.modal-content.delete .btn-cn button {
     height: 42px;
     width: 130px;
     cursor: pointer;
@@ -417,30 +452,30 @@ nav ul li:hover {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: medium;
-    
 }
-.modal-content.delete .btn-cn .cancel-btn{
+
+.modal-content.delete .btn-cn .cancel-btn {
     background-color: transparent;
     border: 1px solid #0683F9;
     border-radius: 2px;
     color: #0683F9;
-
-     
- }
-.modal-content.delete .btn-cn .delete-btn{
-   background-color: #de0028;
-   border-radius: 2px;
-   color: #FFFFFF;
 }
-.modal-content .delete-icon-cn .delete-icon{
+
+.modal-content.delete .btn-cn .delete-btn {
+    background-color: #de0028;
+    border-radius: 2px;
+    color: #FFFFFF;
+}
+
+.modal-content .delete-icon-cn .delete-icon {
     background-image: url(/eliminar-contactos.png);
     background-repeat: no-repeat;
     width: 80px;
     background-size: 100%;
     margin: 30px;
     height: 80px;
-    
 }
+
 .modal-content .modal-contact-and-btn-cn {
     background-color: #1D72C2;
     display: flex;
@@ -640,7 +675,7 @@ nav ul li:hover {
     font-size: small;
 }
 
-.users-li{
+.users-li {
     display: flex;
     text-decoration: none;
     text-align: center;
@@ -650,24 +685,27 @@ nav ul li:hover {
     color: white;
     height: 40px;
 }
-.select-and-delete{
+
+.select-and-delete {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.select-and-delete button{
+
+.select-and-delete button {
     width: 150px;
     height: 30px;
     background: transparent;
     cursor: pointer;
 }
-.select-and-delete .selected-items-p{
-    color:#1D72C2;
+
+.select-and-delete .selected-items-p {
+    color: #1D72C2;
     font-family: 'Open Sans', sans-serif;
     margin: 20px;
-    
 }
-.selected-items-cn{
+
+.selected-items-cn {
     background-color: #e6f2fe;
     border-radius: 4px;
     width: 150px;
@@ -677,12 +715,176 @@ nav ul li:hover {
     justify-content: center;
     margin: 20px;
 }
-.selected-items-cn .selected-items-p{
-    color:#1D72C2;
+
+.selected-items-cn .selected-items-p {
+    color: #1D72C2;
     font-family: 'Open Sans', sans-serif;
     margin: unset;
 }
 
-.hiddenDiv{
+.hiddenDiv {
     display: none;
+}
+
+.add-region-cn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.region-cn {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.region-cn .add-country-cn, .country-cn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.add-country-cn {
+    width: 100%;
+}
+
+.add-country-cn h1 {
+    margin: 20px;
+}
+
+.country-cn {
+    width: 100%;
+}
+
+.region-cn button.inputInitialStyle.add-btn.second-cn {
+    width: 100px;
+}
+
+.region-cn button.inputInitialStyle.add-btn.second-cn.edit {
+    width: 80px;
+}
+
+.country-cn .country-cn-add-delete {
+    display: flex;
+    margin-left: 120px;
+}
+
+.country-cn .country-cn-add-delete h2 {
+    align-self: center;
+    width: 130px;
+}
+
+.city-cn {
+    display: flex;
+    width: 70%;
+}
+
+.city-cn h3 {
+    align-self: center;
+    width: 130px;
+}
+
+.add-country-cn, .country-cn, .city-cn {
+    margin: 20px;
+}
+
+.modal-content.region {
+    width: 30%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-content.region form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-content.region form label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.modal-content.region form label input {
+    border: 1px solid grey;
+    height: 20px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.modal-content.region .modal-contact-and-btn {
+    display: flex;
+    margin: unset;
+    padding: 10px;
+    justify-content: space-between;
+    background-color: #1D72C2;
+}
+
+.add-company-cn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.add-company-cn h1{
+    font-family: 'Open Sans', sans-serif;
+    margin: 20px;
+}
+.ul-Container .list .name-email-cn.company {
+    width: 250px;
+    text-align: center;
+}
+.ul-Container .list .actions-cn.company{
+    width: 250px;
+    display: flex;
+    justify-content: center;
+}
+.list.list.first-row.company{
+    text-align: center;
+}
+.modal-content.city{
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+.modal-content.city .modal-contact-and-btn{
+    display: flex;
+    margin: unset;
+    justify-content: space-between;
+    background-color: #1D72C2;
+    padding: 20px;
+}
+.modal-content.city form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+   margin: 30px;
+    font-family: 'Open Sans', sans-serif;
+
+}
+.modal-content.city form label{
+    font-family: 'Open Sans', sans-serif;
+}
+.modal-content.city form select {
+    border: 1px solid grey;
+    height: 20px;
+    border-radius: 10px;
+    margin: 5px;
+    font-family: 'Open Sans', sans-serif;
+}
+.modal-content.city form label input {
+    border: 1px solid grey;
+    height: 20px;
+    border-radius: 10px;
+    margin: 5px;
+    font-family: 'Open Sans', sans-serif;
+}
+.inputInitialStyle.newContact.disable:disabled{
+background-color: #C6CACC;
 }

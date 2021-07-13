@@ -1,30 +1,39 @@
-import React, { useEffect, useState } from "react";
-import Header from "./Header";
+import React, { useState } from "react";
 import clienteAxios from "../config/axios";
-import CompanyComponent from "./CompanyComponent";
-const Company = () => {
-  const [data, setData] = useState([]);
-  const [NoCompany, setNoCompany] = useState(false);
-  const [companyList, setCompanyList] = useState([]);
+const CompanyComponent = ({ company, data }) => {
+  console.log(company);
+  const [dot, setDot] = useState("dot-icon");
+  const [hidden, setHidden] = useState("hiddenDiv");
+  const [active, setActive] = useState("list");
+  const [deleteModal, setDeleteModal] = useState(false);
   const [error, guardarError] = useState(false);
-  useEffect(() => {
+  function deleteCompany() {
+    setDeleteModal(true);
+  }
+  function closeModal() {
+    setDeleteModal(false);
+    
+  }
+  function deleteCompanyReq() {
+    const companyId = company._id;
     clienteAxios
-      .get("/Ciudad")
+      .delete(`/Company/${companyId}`)
       .then((res) => {
-        setData(res.data.todasLasCiudades);
-      })
-      .catch((error) => console.log(error));
-    clienteAxios
-      .get("/Company")
-      .then((res) => {
-        setCompanyList(res.data.allCompanies);
-        if (res.data.status === 400) {
-          setNoCompany(true);
+        console.log(res);
+        if (res.status === 200) {
+          window.location.reload();
         }
       })
       .catch((error) => console.log(error));
-  }, []);
-
+  }
+  function hover() {
+    setHidden("");
+    setDot("dot-icon hidden");
+  }
+  function endHover() {
+    setHidden("hiddenDiv");
+    setDot("dot-icon");
+  }
   const [modal, setModal] = useState(false);
   const [value, setValue] = useState({
     nombre: "",
@@ -33,15 +42,18 @@ const Company = () => {
     email: "",
     telefono: "",
   });
-  console.log(value);
-  function addCompany() {
+  function selectCity(e) {
+    setValue({ ...value, [e.target.name]: e.target.value });
+   
+  }
+  function editCompany() {
     setModal(true);
   }
+  console.log(value)
   function handleModal() {
     setModal(false);
     guardarError(false)
   }
-
   function handleClick(e) {
     e.preventDefault()
     if(value.nombre ==='' || value.ciudad==='' || value.direccion===''||value.email===''||value.telefono===''){
@@ -50,15 +62,13 @@ const Company = () => {
     }else{
       guardarError(false);
     }
+    const companyId=company._id
     clienteAxios
-      .post("/Company", value)
+      .put(`/Company/${companyId}`, value)
       .then((res) => {
         console.log(res);
       })
       .catch((error) => console.log(error));
-  }
-  function selectCity(e) {
-    setValue({ ...value, [e.target.name]: e.target.value });
   }
   const cities = data.map((city) => {
     return (
@@ -67,57 +77,60 @@ const Company = () => {
       </option>
     );
   });
-
-  const companies = companyList.map((company) => {
-    return (
-      <CompanyComponent
-        key={company._id}
-        company={company}
-        data={data}
-      ></CompanyComponent>
-    );
-  });
   return (
-    <div>
-      <Header></Header>
-      <div className="add-company-cn">
-        <h1>Compañias</h1>
-        <button className="inputInitialStyle add-btn" onClick={addCompany}>
-          Agregar
-        </button>
-      </div>
-      {NoCompany ? (
-        <p>Aun no hay compañias, crea una.</p>
-      ) : (
-        <ul className="ul-Container">
-          <li className="list first-row company">
-            <div className="name-email-cn user">
-              <h2>Nombre</h2>
+    <>
+      <li className={active} onMouseEnter={hover} onMouseLeave={endHover}>
+        <div className="name-email-cn company">
+          <h2>{company.nombre}</h2>
+        </div>
+        <div className="name-email-cn company">
+          <h2>{company.ciudad[0].nombre}</h2>
+        </div>
+        <div className="name-email-cn company">
+          <h2>{company.direccion}</h2>
+        </div>
+        <div className="name-email-cn company">
+          <h2>{company.email}</h2>
+        </div>
+        <div className="name-email-cn company">
+          <h2>{company.telefono}</h2>
+        </div>
+        <div className="actions-cn company">
+          <ul>
+            <div>
+              <div className={dot}></div>
+              <div className={hidden}>
+                <button onClick={deleteCompany} className="trash-icon"></button>
+                <button onClick={editCompany} className="update-icon"></button>
+              </div>
             </div>
-            <div className="company-cn user">
-              <h2>Ciudad</h2>
+          </ul>
+        </div>
+      </li>
+      {deleteModal === true ? (
+        <div className="modal-container">
+          <div className="modal-content delete">
+            <div className="delete-icon-cn">
+              <div className="delete-icon"></div>
             </div>
-            <div className="company-cn user">
-              <h2>Direccion</h2>
+
+            <h2>¿Seguro que deseas eliminar la compañia seleccionada?</h2>
+            <div className="btn-cn">
+              <button className="cancel-btn" onClick={closeModal}>
+                Cancelar
+              </button>
+              <button className="delete-btn" onClick={deleteCompanyReq}>
+                Eliminar
+              </button>
             </div>
-            <div className="company-cn user">
-              <h2>Email</h2>
-            </div>
-            <div className="company-cn user">
-              <h2>Telefono</h2>
-            </div>
-            <div className="company-cn user">
-              <h2>Acciones</h2>
-            </div>
-          </li>
-          {companies}
-        </ul>
-      )}
+          </div>
+        </div>
+      ) : null}
       {modal ? (
         <div className="modal-container">
           <div className="modal-content city">
             <div className="modal-contact-and-btn">
-              <h1>Crear nueva compañia</h1>
+              <h1>Editar compañia</h1>
               <button onClick={handleModal}>
                 <div className="cross-img"></div>
               </button>
@@ -162,7 +175,7 @@ const Company = () => {
               {error ? <p className="error">Todos los campos son obligatorios.</p> : null}
               <input
                 type="submit"
-                value="CREAR"
+                value="EDITAR"
                 className="inputInitialStyle"
                 onClick={handleClick}
               />
@@ -170,8 +183,8 @@ const Company = () => {
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 
-export default Company;
+export default CompanyComponent;
