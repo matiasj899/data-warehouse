@@ -87,10 +87,12 @@ const actualizarContactos = async (req, res) => {
 };
 const eliminarContactos = async (req, res) => {
   try {
-    const { contactosId } = req.body;
+    
+    const contactosId=JSON.parse(req.params.id)
+    console.log(req.params.id)
     const eliminarContacto = await contactosServices.eliminarById(contactosId);
 
-    if (eliminarContacto.length > 0) {
+    if (eliminarContacto) {
       res.status(200).json({
         status: 200,
         msj: "Contactos eliminados correctamente.",

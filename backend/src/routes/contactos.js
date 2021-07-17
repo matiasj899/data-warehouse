@@ -10,6 +10,6 @@ const {
 route.get("/", verContactos);
 route.post("/", crearContactos);
 route.put("/:id", actualizarContactos);
-route.delete("/", eliminarContactos);
+route.delete("/:id", eliminarContactos);
 
 module.exports = route;

@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ListOfContacts = ({ contacto }) => {
- 
+const ListOfContacts = ({ contacto, props }) => {
+  let array = [];
+  const [dot, setDot] = useState("dot-icon");
+  const [hidden, setHidden] = useState("hiddenDiv");
+  const [active, setActive] = useState("list");
+
+  function deleteUser(e) {
+    array.push(contacto._id);
+    const jsonArray = JSON.stringify(array);
+    props.history.push(`/Contactos/${jsonArray}`);
+  }
+
+  function hover() {
+    setHidden("");
+    setDot("dot-icon hidden");
+  }
+  function endHover() {
+    setHidden("hiddenDiv");
+    setDot("dot-icon");
+  }
   return (
-    <li className="list">
+    <li className={active} onMouseEnter={hover} onMouseLeave={endHover}>
       <label>
         <input type="checkbox"></input>
       </label>
@@ -43,8 +61,13 @@ const ListOfContacts = ({ contacto }) => {
       </div>
       <div className="actions-cn">
         <ul>
-          <li>Delete</li>
-          <li>Update</li>
+          <div>
+            <div className={dot}></div>
+            <div className={hidden}>
+              <button className="trash-icon" onClick={deleteUser}></button>
+              <button className="update-icon"></button>
+            </div>
+          </div>
         </ul>
       </div>
     </li>

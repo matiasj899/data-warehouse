@@ -7,10 +7,10 @@ import { Link, NavLink, Redirect } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import ListOfContacts from "./listOfContacts";
 
-const Contactos = () => {
+const Contactos = (props) => {
   const isAdmin = window.sessionStorage.getItem("admin");
   const [contactos, setcontactos] = useState([]);
-  const [result,setResult]=useState(contactos)
+  const [result, setResult] = useState(contactos);
   const [noContacts, setNoContacts] = useState(false);
   const [modal, setModal] = useState(false);
   const { isLogged, logOut } = useUser();
@@ -20,35 +20,33 @@ const Contactos = () => {
     clienteAxios
       .get("/Contactos")
       .then((res) => {
-
         setcontactos(res.data.buscarContactos);
-        setResult(res.data.buscarContactos)
+        setResult(res.data.buscarContactos);
       })
       .catch((err) => {
-       
         if (err) {
           setNoContacts(true);
         }
       });
   }, []);
 
-   const listaContactos = contactos.map((contacto) => (
-    <ListOfContacts key={contacto._id} contacto={contacto} />
+  const listaContactos = contactos.map((contacto) => (
+    <ListOfContacts key={contacto._id} contacto={contacto} props={props}/>
   ));
 
   function showModal() {
     setModal(true);
   }
-  function searcher(e){
-    let value=e.target.value
-  let find=[]
-  console.log(value)
-  find=result.filter((eachResult)=>{
-   return eachResult.nombre===e.target.value
-  })
-  setcontactos(find)
+  function searcher(e) {
+    let value = e.target.value;
+    let find = [];
+    console.log(value);
+    find = result.filter((eachResult) => {
+      return eachResult.nombre === e.target.value;
+    });
+    setcontactos(find);
   }
-console.log(result)
+  console.log(result);
   return (
     <div>
       <Header adminValue={isAdmin} />
@@ -72,40 +70,37 @@ console.log(result)
         </button>
       </div>
 
-     
       {modal === true ? <NewContact modal={modal} setModal={setModal} /> : null}
       {noContacts === true ? (
         <p>Aun no existen contactos, agrega uno.</p>
-      ) : 
-      <ul className="ul-Container">
-      <li className="list first-row">
-        <label>
-          <input type="checkbox"></input>
-        </label>
-        <div className="name-email-cn">
-          <h2>Contacto</h2>
-        </div>
-        <div className="country-region-cn">
-          <h2>Pais/Region</h2>
-        </div>
-        <div className="company-cn">
-          <h2>Compañia</h2>
-        </div>
-        <div className="position-cn">
-          <h2>Cargo</h2>
-        </div>
-        <div className="interest-cn">
-          <h2>Interes</h2>
-        </div>
-        <div className="actions-cn">
-          <h2>Acciones</h2>
-        </div>
-      </li>
-      {listaContactos}
-    </ul>
-    }
-   
-
+      ) : (
+        <ul className="ul-Container">
+          <li className="list first-row">
+            <label>
+              <input type="checkbox"></input>
+            </label>
+            <div className="name-email-cn">
+              <h2>Contacto</h2>
+            </div>
+            <div className="country-region-cn">
+              <h2>Pais/Region</h2>
+            </div>
+            <div className="company-cn">
+              <h2>Compañia</h2>
+            </div>
+            <div className="position-cn">
+              <h2>Cargo</h2>
+            </div>
+            <div className="interest-cn">
+              <h2>Interes</h2>
+            </div>
+            <div className="actions-cn">
+              <h2>Acciones</h2>
+            </div>
+          </li>
+          {listaContactos}
+        </ul>
+      )}
     </div>
   );
 };

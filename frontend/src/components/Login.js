@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
 import Contactos from "./Contactos";
 import useUser from "../hooks/useUser";
+
 const Login = (props) => {
-  const {userLog,isLogged}=useUser()
-  console.log(isLogged)
+  const { userLog, isLogged } = useUser();
+  console.log(isLogged);
   //generar state como objeto
   const [state, setstate] = useState({
     email: "",
@@ -27,7 +28,6 @@ const Login = (props) => {
 
   //enviar peticion a la api
   const logUser = (e) => {
-    
     e.preventDefault();
     if (state.email === "" || state.password === "") {
       guardarError(true);
@@ -42,8 +42,8 @@ const Login = (props) => {
         console.log(res);
         if (res.status === 200) {
           console.log(res);
-          userLog(res.data.token,res.data.admin)
-        
+          userLog(res.data.token, res.data.admin);
+
           props.history.push("/Contactos");
         }
       })
@@ -60,9 +60,7 @@ const Login = (props) => {
   return (
     <div className="full-container">
       <nav>
-        
-          <h1 className="logo">LOGO</h1>
-        
+        <h1 className="logo">LOGO</h1>
       </nav>
       <div className="login-container">
         <div className="login-box">
