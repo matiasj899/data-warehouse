@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AllUsers = ({ user, props, allCheckbox, eliminarArray }) => {
+const AllUsers = ({ user, props, allCheckbox }) => {
   let array = [];
   useEffect(() => {
     handleClick();
@@ -11,10 +11,10 @@ const AllUsers = ({ user, props, allCheckbox, eliminarArray }) => {
   const [dot, setDot] = useState("dot-icon");
   const [count, setCount] = useState([]);
   const [checkbox, setCheckbox] = useState(true);
-
+  const [checkboxType, setCheckboxType] = useState("checkbox");
+  const [deleteArray, setdeleteArray] = useState(array);
   function handleClick() {
     setCheckbox(!checkbox);
-
     if (checkbox === false) {
       setActive("list active");
     } else {
@@ -36,14 +36,22 @@ const AllUsers = ({ user, props, allCheckbox, eliminarArray }) => {
     setHidden("hiddenDiv");
     setDot("dot-icon");
   }
+  function deleteEachUser(){
+    array.push(user._id)
+    console.log(deleteArray)
+  }
+  
+  
   return (
     <>
       <li className={active} onMouseEnter={hover} onMouseLeave={endHover}>
         <label>
           <input
-            type="checkbox"
+            type={checkboxType}
             onChange={handleClick}
-            checked={checkbox}
+            onClick={deleteEachUser}
+            checked={allCheckbox ? allCheckbox : checkbox}
+            value={user._id}
           ></input>
         </label>
         <div className="name-email-cn">

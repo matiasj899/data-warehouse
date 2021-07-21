@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Contactos from "./Contactos";
 
-const ListOfContacts = ({ contacto, props }) => {
-  let array = [];
-  const [dot, setDot] = useState("dot-icon");
-  const [hidden, setHidden] = useState("hiddenDiv");
+const ListOfContacts = ({
+  contacto,
+  props,
+  allCheckbox,
+  hiddenCheckbox,
+  setHiddenCheckbox,
+  array,
+  selected,
+  setSelected,
+  count,
+  setCount,
+  deleteArray,
+  setdeleteArray
+}) => {
+  useEffect(() => {
+    handleClick();
+  }, [allCheckbox]);
+
   const [active, setActive] = useState("list");
+  const [hidden, setHidden] = useState("hiddenDiv");
+  const [dot, setDot] = useState("dot-icon");
+ 
+  const [checkbox, setCheckbox] = useState(true);
+  const [checkboxType, setCheckboxType] = useState("checkbox");
 
   function deleteUser(e) {
     array.push(contacto._id);
@@ -20,10 +40,35 @@ const ListOfContacts = ({ contacto, props }) => {
     setHidden("hiddenDiv");
     setDot("dot-icon");
   }
+  function handleClick() {
+    setCheckbox(!checkbox);
+    if (checkbox === false) {
+      setActive("list active");
+    } else {
+      setActive("list");
+    }
+  }
+  function deleteEachUser(e) {
+    if (e.target.checked === true) {
+      array.push(contacto._id);
+      setdeleteArray([...deleteArray,...array])
+      
+    } else {
+      const index = deleteArray.indexOf(contacto._id);
+      deleteArray.splice(index, 1);
+    setdeleteArray([...deleteArray])
+    }
+  }
+  
   return (
     <li className={active} onMouseEnter={hover} onMouseLeave={endHover}>
       <label>
-        <input type="checkbox"></input>
+        <input
+          type={allCheckbox?"hidden":"checkbox"}
+          onChange={handleClick}
+          onClick={deleteEachUser}
+          checked={allCheckbox ? allCheckbox : checkbox}
+        ></input>
       </label>
       <div className="name-email-cn">
         <h2>{contacto.nombre + " " + contacto.apellido}</h2>

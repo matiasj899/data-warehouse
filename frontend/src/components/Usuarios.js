@@ -53,6 +53,11 @@ const Usuarios = (props) => {
       user={user}
       props={props}
       allCheckbox={allCheckbox}
+      selected={selected}
+      setSelected={setSelected}
+      deleteArray={deleteArray}
+      setdeleteArray={setdeleteArray}
+      setCount={setCount}
     />
   ));
 

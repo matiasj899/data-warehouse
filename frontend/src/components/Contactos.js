@@ -9,11 +9,17 @@ import ListOfContacts from "./listOfContacts";
 
 const Contactos = (props) => {
   const isAdmin = window.sessionStorage.getItem("admin");
+  let array = [];
   const [contactos, setcontactos] = useState([]);
   const [result, setResult] = useState(contactos);
   const [noContacts, setNoContacts] = useState(false);
   const [modal, setModal] = useState(false);
   const { isLogged, logOut } = useUser();
+  const [count, setCount] = useState([]);
+  const [deleteArray, setdeleteArray] = useState([]);
+  const [selected, setSelected] = useState(false);
+  const [allCheckbox, setAllCheckbox] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
     console.log("desde use effect");
@@ -29,9 +35,59 @@ const Contactos = (props) => {
         }
       });
   }, []);
+  useEffect(() => {
+    if (allCheckbox===true) {
+      setSelected(true);
+      setCount(deleteArray.length);
+    }else{
+      
+      setSelected(false)
+      setCount(null)
 
+    }
+    if(deleteArray.length>0){
+      setSelected(true)
+      setCount(deleteArray.length)
+    }else{
+      setSelected(false)
+      setCount(null)
+    }
+
+  }, [deleteArray]);
+
+  function handleClick(e) {
+    setAllCheckbox(!allCheckbox);
+    const numberOfUsers = contactos.map((number) => {
+      array.push(number._id);
+      setdeleteArray(array);
+    });
+    setCount(array.length);
+    setSelected(!selected);
+    if (allCheckbox === true) {
+      setdeleteArray([])
+      setCount(null);
+    }
+  }
+  function deleteUser(e) {
+    const jsonArray = JSON.stringify(deleteArray);
+    props.history.push(`/Contactos/${jsonArray}`);
+  }
   const listaContactos = contactos.map((contacto) => (
-    <ListOfContacts key={contacto._id} contacto={contacto} props={props}/>
+    <ListOfContacts
+      key={contacto._id}
+      contacto={contacto}
+      props={props}
+      allCheckbox={allCheckbox}
+      hiddenCheckbox={hidden}
+      setHiddenCheckbox={setHidden}
+      array={array}
+      count={count}
+      setCount={setCount}
+      selected={selected}
+      setSelected={setSelected}
+      deleteArray={deleteArray}
+      setdeleteArray={setdeleteArray}
+    />
   ));
 
   function showModal() {
@@ -46,11 +102,14 @@ const Contactos = (props) => {
     });
     setcontactos(find);
   }
-  console.log(result);
+  console.log(selected);
+  console.log(deleteArray)
+
   return (
-    <div>
+    <div id='contacts-main-cn'>
       <Header adminValue={isAdmin} />
       <h1 className="logo contacts-title">Contactos</h1>
+
       <div className="search-and-add">
         <form>
           <label htmlFor="search">
@@ -69,16 +128,43 @@ const Contactos = (props) => {
           Agregar contacto
         </button>
       </div>
-
+      {selected ? (
+        <div className="select-and-delete">
+          <div className="selected-items-cn">
+            <p className="selected-items-p">{count} seleccionados</p>
+          </div>
+          <button className="selected-items-p" onClick={deleteUser}>
+            Eliminar contactos
+          </button>
+        </div>
+      ) : null}
       {modal === true ? <NewContact modal={modal} setModal={setModal} /> : null}
       {noContacts === true ? (
-        <p>Aun no existen contactos, agrega uno.</p>
+       <div id='noContacts-container'> <p className="noContacts-message">Aun no existen contactos, agrega uno.</p></div>
       ) : (
         <ul className="ul-Container">
           <li className="list first-row">
-            <label>
-              <input type="checkbox"></input>
-            </label>
+            {hidden ? (
+              <label>
+                <input
+                  type="checkbox"
+                  value="checkedAll"
+                  onChange={handleClick}
+                  checked={allCheckbox}
+                ></input>
+              </label>
+            ) : (
+              <label>
+                <input
+                  id="hidden-checkbox"
+                  type="hidden"
+                  value="checkedAll"
+                  onChange={handleClick}
+                  checked={allCheckbox}
+                ></input>
+              </label>
+            )}
+
             <div className="name-email-cn">
               <h2>Contacto</h2>
             </div>
@@ -98,6 +184,7 @@ const Contactos = (props) => {
               <h2>Acciones</h2>
             </div>
           </li>
+
           {listaContactos}
         </ul>
       )}

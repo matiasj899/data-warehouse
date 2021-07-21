@@ -21,7 +21,7 @@ const UsuariosForm = ({ axiosConfig }) => {
     });
   }
   function actualizarAdmin(e) {
-    console.log(e.target.value);
+    
     if (e.target.value === "true") {
       newUser.admin = true;
     }

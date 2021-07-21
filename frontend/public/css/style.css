@@ -205,7 +205,10 @@ nav ul li:hover {
     justify-content: center;
     margin: unset;
 }
-
+#contacts-main-cn{
+    display: flex;
+    flex-direction: column;
+}
 .search-img {
     background-image: url(../search-solid.svg);
     background-repeat: no-repeat;
@@ -899,4 +902,25 @@ background-color: #C6CACC;
 .save-btn{
     background-color: #1D72C2;
     color: #fefefe;
+}
+#hidden-checkbox:checked ~ label::before{
+    content: '\f0c9'
+}
+
+#noContacts-container {
+    background-color: #1D72C2;
+    width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 50px;
+    align-self: center;
+    align-items: center;
+    border-radius: 5px;
+}
+#noContacts-container .noContacts-message{
+    color: #fefefe;
+    font-family: 'Open Sans', sans-serif;
+    font-size: larger;
 }
