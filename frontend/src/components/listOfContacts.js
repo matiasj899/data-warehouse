@@ -13,7 +13,9 @@ const ListOfContacts = ({
   count,
   setCount,
   deleteArray,
-  setdeleteArray
+  setdeleteArray,
+  editModal,
+  setEditModal
 }) => {
   useEffect(() => {
     handleClick();
@@ -31,7 +33,10 @@ const ListOfContacts = ({
     const jsonArray = JSON.stringify(array);
     props.history.push(`/Contactos/${jsonArray}`);
   }
-
+function editUser(){
+setEditModal(true)
+    props.history.push(`/Contactos/Edit/${contacto._id}`)
+}
   function hover() {
     setHidden("");
     setDot("dot-icon hidden");
@@ -110,7 +115,7 @@ const ListOfContacts = ({
             <div className={dot}></div>
             <div className={hidden}>
               <button className="trash-icon" onClick={deleteUser}></button>
-              <button className="update-icon"></button>
+              <button className="update-icon" onClick={editUser}></button>
             </div>
           </div>
         </ul>

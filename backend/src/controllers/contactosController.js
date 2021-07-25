@@ -50,7 +50,9 @@ const crearContactos = async (req, res) => {
     });
   }
 };
+
 const actualizarContactos = async (req, res) => {
+ 
   try {
     const contactoId = req.params.id;
     const contactoData = req.body;
@@ -87,9 +89,8 @@ const actualizarContactos = async (req, res) => {
 };
 const eliminarContactos = async (req, res) => {
   try {
-    
-    const contactosId=JSON.parse(req.params.id)
-    console.log(req.params.id)
+    const contactosId = JSON.parse(req.params.id);
+    console.log(req.params.id);
     const eliminarContacto = await contactosServices.eliminarById(contactosId);
 
     if (eliminarContacto) {

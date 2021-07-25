@@ -6,6 +6,7 @@ import NewContact from "./NewContactModal";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import ListOfContacts from "./listOfContacts";
+import EditContact from "./EditContact";
 
 const Contactos = (props) => {
   const isAdmin = window.sessionStorage.getItem("admin");
@@ -14,6 +15,7 @@ const Contactos = (props) => {
   const [result, setResult] = useState(contactos);
   const [noContacts, setNoContacts] = useState(false);
   const [modal, setModal] = useState(false);
+  const [editModal,setEditModal]=useState(false)
   const { isLogged, logOut } = useUser();
   const [count, setCount] = useState([]);
   const [deleteArray, setdeleteArray] = useState([]);
@@ -36,23 +38,20 @@ const Contactos = (props) => {
       });
   }, []);
   useEffect(() => {
-    if (allCheckbox===true) {
+    if (allCheckbox === true) {
       setSelected(true);
       setCount(deleteArray.length);
-    }else{
-      
-      setSelected(false)
-      setCount(null)
-
+    } else {
+      setSelected(false);
+      setCount(null);
     }
-    if(deleteArray.length>0){
-      setSelected(true)
-      setCount(deleteArray.length)
-    }else{
-      setSelected(false)
-      setCount(null)
+    if (deleteArray.length > 0) {
+      setSelected(true);
+      setCount(deleteArray.length);
+    } else {
+      setSelected(false);
+      setCount(null);
     }
-
   }, [deleteArray]);
 
   function handleClick(e) {
@@ -64,7 +63,7 @@ const Contactos = (props) => {
     setCount(array.length);
     setSelected(!selected);
     if (allCheckbox === true) {
-      setdeleteArray([])
+      setdeleteArray([]);
       setCount(null);
     }
   }
@@ -87,6 +86,8 @@ const Contactos = (props) => {
       setSelected={setSelected}
       deleteArray={deleteArray}
       setdeleteArray={setdeleteArray}
+      editModal={editModal}
+      setEditModal={setEditModal}
     />
   ));
 
@@ -98,15 +99,35 @@ const Contactos = (props) => {
     let find = [];
     console.log(value);
     find = result.filter((eachResult) => {
-      return eachResult.nombre === e.target.value;
+      console.log(eachResult);
+      const inputValue = e.target.value.toLowerCase().replace(/\s/g, "");
+      const name = eachResult.nombre.toLowerCase().replace(/\s/g, "");
+      const lastname = eachResult.apellido.toLowerCase();
+      const country = eachResult.pais[0].nombre.toLowerCase();
+      const position = eachResult.cargo.toLowerCase();
+      const city=eachResult.ciudad[0].nombre.toLowerCase()
+      const email=eachResult.email.toLowerCase()
+      const company=eachResult.compañia[0].nombre.toLowerCase().replace(/\s/g, "");
+      const fullname= name + lastname
+      const region=eachResult.region[0].nombre.toLowerCase()
+      return (
+        name.includes(inputValue) ||
+        lastname.includes(inputValue) ||
+        country.includes(inputValue) ||
+        position.includes(inputValue) ||
+        city.includes(inputValue) ||
+        email.includes(inputValue)||
+        company.includes(inputValue)||
+        fullname.includes(inputValue)
+        ||
+        region.includes(inputValue)
+      );
     });
     setcontactos(find);
   }
-  console.log(selected);
-  console.log(deleteArray)
 
   return (
-    <div id='contacts-main-cn'>
+    <div id="contacts-main-cn">
       <Header adminValue={isAdmin} />
       <h1 className="logo contacts-title">Contactos</h1>
 
@@ -139,8 +160,14 @@ const Contactos = (props) => {
         </div>
       ) : null}
       {modal === true ? <NewContact modal={modal} setModal={setModal} /> : null}
+      {editModal === true ? <EditContact modal={modal} setModal={setModal} /> : null}
       {noContacts === true ? (
-       <div id='noContacts-container'> <p className="noContacts-message">Aun no existen contactos, agrega uno.</p></div>
+        <div id="noContacts-container">
+          {" "}
+          <p className="noContacts-message">
+            Aun no existen contactos, agrega uno.
+          </p>
+        </div>
       ) : (
         <ul className="ul-Container">
           <li className="list first-row">
