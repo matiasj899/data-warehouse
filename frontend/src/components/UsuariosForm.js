@@ -29,7 +29,7 @@ const UsuariosForm = ({ axiosConfig }) => {
   function secondPassword(e) {
     setrepeatPassword(e.target.value);
   }
-  console.log(newUser);
+  
   function handleClick(e) {
     e.preventDefault();
     if (

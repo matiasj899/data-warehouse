@@ -323,7 +323,7 @@ const NewContact = ({ modal, setModal }) => {
                 type="text"
                 name="cuenta"
                 className="inputInitialStyle newContact "
-                placeholder="Ingrese una direccion"
+                placeholder="@ejemplo"
                 onChange={channelForm}
               ></input>
             </div>

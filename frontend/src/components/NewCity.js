@@ -50,6 +50,7 @@ const NewCity = ({ modal, setModal, countryId, jwt }) => {
             {" "}
             Nombre
             <input type="text" name="nombre" onChange={createCountry}></input>
+            {error ? <p className="error">Campos obligatorios.</p> : null}
           </label>
           <input
             type="submit"

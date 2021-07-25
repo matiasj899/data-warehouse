@@ -49,6 +49,7 @@ const NewRegion = ({ modal, setModal, jwt }) => {
             {" "}
             Nombre
             <input type="text" name="nombre" onChange={createRegion}></input>
+            {error ? <p className="error">Campos obligatorios.</p> : null}
           </label>
           <input
             type="submit"

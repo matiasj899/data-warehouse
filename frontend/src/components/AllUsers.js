@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import EditUser from "./EditUser";
 
 const AllUsers = ({ user, props, allCheckbox }) => {
   let array = [];
@@ -13,6 +14,7 @@ const AllUsers = ({ user, props, allCheckbox }) => {
   const [checkbox, setCheckbox] = useState(true);
   const [checkboxType, setCheckboxType] = useState("checkbox");
   const [deleteArray, setdeleteArray] = useState(array);
+  const [editModal,setEditModal]=useState(false)
   function handleClick() {
     setCheckbox(!checkbox);
     if (checkbox === false) {
@@ -41,11 +43,13 @@ const AllUsers = ({ user, props, allCheckbox }) => {
     console.log(deleteArray)
   }
   
-  
+  function updateUser(){
+    setEditModal(true)
+  }
   return (
     <>
       <li className={active} onMouseEnter={hover} onMouseLeave={endHover}>
-        <label>
+        {/* <label>
           <input
             type={checkboxType}
             onChange={handleClick}
@@ -53,7 +57,7 @@ const AllUsers = ({ user, props, allCheckbox }) => {
             checked={allCheckbox ? allCheckbox : checkbox}
             value={user._id}
           ></input>
-        </label>
+        </label> */}
         <div className="name-email-cn">
           <h2>{user.nombre}</h2>
         </div>
@@ -69,12 +73,13 @@ const AllUsers = ({ user, props, allCheckbox }) => {
               <div className={dot}></div>
               <div className={hidden}>
                 <button onClick={deleteUser} className="trash-icon"></button>
-                <button className="update-icon"></button>
+                <button onClick={updateUser} className="update-icon"></button>
               </div>
             </div>
           </ul>
         </div>
       </li>
+      {editModal?<EditUser editModal={editModal} setEditModal={setEditModal} userId={user._id}></EditUser>:null}
     </>
   );
 };

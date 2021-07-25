@@ -64,7 +64,7 @@ const Usuarios = (props) => {
   return (
     <div>
       <Header></Header>
-      {selected ? (
+      {/* {selected ? (
         <div className="select-and-delete">
           <div className="selected-items-cn">
             <p className="selected-items-p">{count} seleccionados</p>
@@ -73,20 +73,20 @@ const Usuarios = (props) => {
             Eliminar contactos
           </button>
         </div>
-      ) : null}
+      ) : null} */}
 
       <ul className="ul-Container">
         <li className="users-li">
           <h2>Usuarios</h2>
         </li>
         <li className="list first-row">
-          <label>
+          {/* <label>
             <input
               type="checkbox"
               onChange={handleClick}
               checked={allCheckbox}
             ></input>
-          </label>
+          </label> */}
           <div className="name-email-cn user">
             <h2>Nombre</h2>
           </div>
