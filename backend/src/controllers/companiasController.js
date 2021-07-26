@@ -16,7 +16,7 @@ const verCompanias = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(200).json({
+    res.status(400).json({
       status: 400,
       error,
     });

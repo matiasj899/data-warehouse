@@ -8,14 +8,8 @@ const NewContact = ({ modal, setModal }) => {
   const [company, setCompany] = useState([]);
   const [countryForm, setCountryForm] = useState(false);
   const [cityForm, setCityForm] = useState(false);
-  const [error, setError]=useState(false)
-  /*const [contacto,setContacto]=useState(
-    {
-      canal:'',
-    cuenta:'',
-    preferencia:"",
-    }
-  )*/
+  const [error, setError] = useState(false);
+
   const [contact, setContact] = useState({
     nombre: "",
     apellido: "",
@@ -37,14 +31,12 @@ const NewContact = ({ modal, setModal }) => {
     clienteAxios
       .get("/Region")
       .then((res) => {
-        console.log(res);
         setRegion(res.data.allRegions);
       })
       .catch((error) => console.log(error));
     clienteAxios
       .get("/Company")
       .then((res) => {
-        console.log(res);
         setCompany(res.data.allCompanies);
       })
       .catch((error) => console.log(error));
@@ -66,12 +58,12 @@ const NewContact = ({ modal, setModal }) => {
     });
     setCountryForm(true);
   }
-  console.log(contact);
+
   function selectCountry(e) {
     const countryId = country.filter(
       (eachCountry) => eachCountry._id === e.target.value
     );
-    console.log(countryId);
+    
     const cities = countryId.map((country) => country.ciudades);
 
     setCity(cities[0]);
@@ -97,7 +89,6 @@ const NewContact = ({ modal, setModal }) => {
     });
   }
 
-  console.log(contact);
   const regions = region.map((eachRegion) => {
     return (
       <option key={eachRegion._id} value={eachRegion._id}>
@@ -134,8 +125,9 @@ const NewContact = ({ modal, setModal }) => {
         window.location.reload();
       })
       .catch((error) => {
-        setError(true)
-        console.log(error)});
+        setError(true);
+        console.log(error);
+      });
   }
   return (
     <div className="modal-container">
@@ -201,9 +193,9 @@ const NewContact = ({ modal, setModal }) => {
                   className="inputInitialStyle newContact"
                   name="compañia"
                   onChange={contactForm}
-                  defaultValue={""}
+                  defaultValue={"DEFAULT"}
                 >
-                  <option value="" disabled>
+                  <option value="DEFAULT" disabled>
                     Seleccionar compañia
                   </option>
                   {companies}
@@ -221,8 +213,9 @@ const NewContact = ({ modal, setModal }) => {
                 className="inputInitialStyle newContact"
                 name="region"
                 onChange={selectRegion}
+                defaultValue={"DEFAULT"}
               >
-                <option value="" selected="defaultValue" disabled="disabled">
+                <option value="DEFAULT" disabled="disabled">
                   Seleccionar region
                 </option>
                 {regions}
@@ -235,8 +228,9 @@ const NewContact = ({ modal, setModal }) => {
                   className="inputInitialStyle newContact"
                   onChange={selectCountry}
                   name="pais"
+                  defaultValue={"DEFAULT"}
                 >
-                  <option value="" selected="defaultValue" disabled="disabled">
+                  <option value="DEFAULT" disabled="disabled">
                     Seleccionar pais
                   </option>
                   {countries}
@@ -245,8 +239,9 @@ const NewContact = ({ modal, setModal }) => {
                 <select
                   className="inputInitialStyle newContact disable"
                   disabled
+                  defaultValue={"DEFAULT"}
                 >
-                  <option value="">Seleccionar pais</option>
+                  <option value="DEFAULT">Seleccionar pais</option>
                 </select>
               )}
             </div>
@@ -257,8 +252,9 @@ const NewContact = ({ modal, setModal }) => {
                   className="inputInitialStyle newContact"
                   name="ciudad"
                   onChange={contactForm}
+                  defaultValue={"DEFAULT"}
                 >
-                  <option value="" selected="defaultValue" disabled="disabled">
+                  <option value="DEFAULT" disabled="disabled">
                     Seleccionar ciudad
                   </option>
                   {cities}
@@ -267,8 +263,9 @@ const NewContact = ({ modal, setModal }) => {
                 <select
                   className="inputInitialStyle newContact disable"
                   disabled
+                  defaultValue={"DEFAULT"}
                 >
-                  <option value="" selected="defaultValue" disabled="disabled">
+                  <option value="DEFAULT" disabled="disabled">
                     Seleccionar ciudad
                   </option>
                 </select>
@@ -310,8 +307,9 @@ const NewContact = ({ modal, setModal }) => {
                 className="inputInitialStyle newContact"
                 name="canal"
                 onChange={channelForm}
+                defaultValue={"DEFAULT"}
               >
-                <option value="" selected="defaultValue" disabled="disabled">
+                <option value="DEFAULT" disabled="disabled">
                   Selecciona un canal
                 </option>
                 <option value="linkedin">Linkedin</option>
@@ -333,8 +331,9 @@ const NewContact = ({ modal, setModal }) => {
                 className="inputInitialStyle newContact"
                 onChange={channelForm}
                 name="preferencia"
+                defaultValue={"DEFAULT"}
               >
-                <option value="" selected="defaultValue" disabled="disabled">
+                <option value="DEFAULT" disabled="disabled">
                   Selecciona una preferencia
                 </option>
                 <option value="sin preferencia">Sin preferencia</option>
@@ -344,10 +343,14 @@ const NewContact = ({ modal, setModal }) => {
             </div>
           </form>
         </div>
-        {error?<p className="error">Todos los datos son obligatorios.</p>:null}
+        {error ? (
+          <p className="error">Todos los datos son obligatorios.</p>
+        ) : null}
         <div className="save-and-cancel-cn">
           <div className="btn-cn">
-            <button className="cancel-btn" onClick={handleModal}>Cancelar</button>
+            <button className="cancel-btn" onClick={handleModal}>
+              Cancelar
+            </button>
             <button className="save-btn" onClick={newContactReq}>
               Guardar contacto
             </button>

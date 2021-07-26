@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NewCity from "./NewCity";
 import clienteAxios from "../config/axios";
 import CityComponent from "./CityComponent";
 const CountryComponent = ({ country, jwt }) => {
-  console.log(country.ciudades);
   const cities = country.ciudades;
 
   const [modal, setModal] = useState(false);
@@ -15,7 +14,6 @@ const CountryComponent = ({ country, jwt }) => {
     setModal(true);
   }
   function addCity() {
-    console.log(country._id);
     showModal();
   }
   function editCountry() {
@@ -25,7 +23,6 @@ const CountryComponent = ({ country, jwt }) => {
     setEditModal(false);
   }
   function editName(e) {
-    console.log(e.target.value);
     setPais({ ...pais, [e.target.name]: e.target.value });
   }
   function deleteCountry() {
@@ -35,8 +32,7 @@ const CountryComponent = ({ country, jwt }) => {
     setDeleteModal(false);
   }
   function deleteRequest() {
-    
-    const countryId=country._id
+    const countryId = country._id;
     clienteAxios
       .delete(`/Pais/${countryId}`)
       .then((res) => {
@@ -50,7 +46,7 @@ const CountryComponent = ({ country, jwt }) => {
   function editRequest(e) {
     e.preventDefault();
     const countryId = country._id;
-    console.log(pais.nombre);
+
     if (pais.nombre === "") {
       guardarError(true);
       return;

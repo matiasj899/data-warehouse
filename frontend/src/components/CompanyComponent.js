@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import clienteAxios from "../config/axios";
 const CompanyComponent = ({ company, data }) => {
-  console.log(company);
+  
   const [dot, setDot] = useState("dot-icon");
   const [hidden, setHidden] = useState("hiddenDiv");
   const [active, setActive] = useState("list");
@@ -19,7 +19,7 @@ const CompanyComponent = ({ company, data }) => {
     clienteAxios
       .delete(`/Company/${companyId}`)
       .then((res) => {
-        console.log(res);
+       
         if (res.status === 200) {
           window.location.reload();
         }
@@ -49,7 +49,7 @@ const CompanyComponent = ({ company, data }) => {
   function editCompany() {
     setModal(true);
   }
-  console.log(value)
+  
   function handleModal() {
     setModal(false);
     guardarError(false)
@@ -66,7 +66,6 @@ const CompanyComponent = ({ company, data }) => {
     clienteAxios
       .put(`/Company/${companyId}`, value)
       .then((res) => {
-        console.log(res);
       })
       .catch((error) => console.log(error));
   }

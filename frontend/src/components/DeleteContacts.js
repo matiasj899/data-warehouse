@@ -3,7 +3,7 @@ import clienteAxios from "../config/axios";
 import Contactos from "./Contactos";
 const DeleteContacts = (props) => {
   const contactosId = props.match.params.id;
-  
+
   const jwt = window.sessionStorage.getItem("jwt");
   const axiosConfig = {
     headers: {

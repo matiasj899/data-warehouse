@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import clienteAxios from "../config/axios";
 
-const CityComponent = ({ city, jwt }) => {
-  console.log(city);
-  const [modal, setModal] = useState(false);
+const CityComponent = ({ city }) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [error, guardarError] = useState(false);
-  const [pais,setPais]=useState({ nombre: "" })
+  const [pais, setPais] = useState({ nombre: "" });
   function deleteCountry() {
     setDeleteModal(true);
   }
@@ -20,14 +18,12 @@ const CityComponent = ({ city, jwt }) => {
   function handleModal() {
     setEditModal(false);
   }
-  function editName(e){
-    console.log(e.target.value);
+  function editName(e) {
     setPais({ ...pais, [e.target.name]: e.target.value });
   }
   function editRequest(e) {
-   
     e.preventDefault();
-    console.log(city._id);
+
     const cityId = city._id;
     if (pais.nombre === "") {
       guardarError(true);
@@ -36,7 +32,7 @@ const CityComponent = ({ city, jwt }) => {
       guardarError(false);
     }
     clienteAxios
-      .put(`/Ciudad/${cityId}`,pais)
+      .put(`/Ciudad/${cityId}`, pais)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
@@ -46,7 +42,7 @@ const CityComponent = ({ city, jwt }) => {
       .catch((error) => console.log(error));
   }
   function deleteCity() {
-   const cityId=city._id
+    const cityId = city._id;
     clienteAxios
       .delete(`/Ciudad/${cityId}`)
       .then((res) => {
@@ -117,7 +113,6 @@ const CityComponent = ({ city, jwt }) => {
           </div>
         </div>
       ) : null}
-      
     </div>
   );
 };

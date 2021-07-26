@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import clienteAxios from "../config/axios";
 
-const NewCountry = ({ modal, setModal, jwt, regionId }) => {
-  console.log(regionId);
+const NewCountry = ({ setModal, jwt, regionId }) => {
   const [region, setRegion] = useState({ nombre: "" });
   const [error, guardarError] = useState(false);
   const [loginError, guardarloginError] = useState(false);
@@ -15,7 +14,6 @@ const NewCountry = ({ modal, setModal, jwt, regionId }) => {
     setModal(false);
   }
   function createCountry(e) {
-    console.log(e.target.value);
     setRegion({ ...region, [e.target.name]: e.target.value });
   }
   function handleClick(e) {

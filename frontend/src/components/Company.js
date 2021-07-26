@@ -17,9 +17,10 @@ const Company = () => {
     clienteAxios
       .get("/Company")
       .then((res) => {
-        setCompanyList(res.data.allCompanies);
         if (res.data.status === 400) {
           setNoCompany(true);
+        } else {
+          setCompanyList(res.data.allCompanies);
         }
       })
       .catch((error) => console.log(error));
@@ -33,27 +34,35 @@ const Company = () => {
     email: "",
     telefono: "",
   });
-  console.log(value);
+
   function addCompany() {
     setModal(true);
   }
   function handleModal() {
     setModal(false);
-    guardarError(false)
+    guardarError(false);
   }
 
   function handleClick(e) {
-    e.preventDefault()
-    if(value.nombre ==='' || value.ciudad==='' || value.direccion===''||value.email===''||value.telefono===''){
+    e.preventDefault();
+    if (
+      value.nombre === "" ||
+      value.ciudad === "" ||
+      value.direccion === "" ||
+      value.email === "" ||
+      value.telefono === ""
+    ) {
       guardarError(true);
       return;
-    }else{
+    } else {
       guardarError(false);
     }
     clienteAxios
       .post("/Company", value)
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) {
+          window.location.reload();
+        }
       })
       .catch((error) => console.log(error));
   }
@@ -87,7 +96,13 @@ const Company = () => {
         </button>
       </div>
       {NoCompany ? (
-        <p>Aun no hay compañias, crea una.</p>
+        <div id="noCompany-cn">
+          <div id="noContacts-container">
+            <p className="noContacts-message">
+              Aun no hay compañias, crea una.
+            </p>
+          </div>
+        </div>
       ) : (
         <ul className="ul-Container">
           <li className="list first-row company">
@@ -159,7 +174,9 @@ const Company = () => {
                   onChange={selectCity}
                 ></input>
               </label>
-              {error ? <p className="error">Todos los campos son obligatorios.</p> : null}
+              {error ? (
+                <p className="error">Todos los campos son obligatorios.</p>
+              ) : null}
               <input
                 type="submit"
                 value="CREAR"

@@ -18,7 +18,7 @@ const UsuariosList = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(users);
+
   const userData = users.map((user) => {
     <AllUsers key={user._id} user={user}></AllUsers>;
   });

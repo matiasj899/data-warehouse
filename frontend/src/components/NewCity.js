@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import clienteAxios from "../config/axios";
 const NewCity = ({ modal, setModal, countryId, jwt }) => {
-  console.log(countryId);
+ 
   const [pais, setPais] = useState({ nombre: "" });
   const [error, guardarError] = useState(false);
   const [loginError, guardarloginError] = useState(false);
@@ -14,7 +14,6 @@ const NewCity = ({ modal, setModal, countryId, jwt }) => {
     setModal(false);
   }
   function createCountry(e) {
-    console.log(e.target.value);
     setPais({ ...pais, [e.target.name]: e.target.value });
   }
   function handleClick(e) {
@@ -29,7 +28,7 @@ const NewCity = ({ modal, setModal, countryId, jwt }) => {
     clienteAxios
       .post(`/Ciudad/${countryId}`, pais, axiosConfig)
       .then((res) => {
-        console.log(res);
+        
         if (res.status == 200) {
           window.location.reload();
         }

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+
 import clienteAxios from "../config/axios";
-import Contactos from "./Contactos";
+
 import useUser from "../hooks/useUser";
 
 const Login = (props) => {
   const { userLog, isLogged } = useUser();
-  console.log(isLogged);
-  //generar state como objeto
+
   const [state, setstate] = useState({
     email: "",
     password: "",
@@ -15,7 +14,7 @@ const Login = (props) => {
 
   const [error, guardarError] = useState(false);
   const [loginError, guardarloginError] = useState(false);
-  //leer datos formulario
+
   const actualizarState = (e) => {
     setstate({
       ...state,
@@ -26,7 +25,6 @@ const Login = (props) => {
     }
   };
 
-  //enviar peticion a la api
   const logUser = (e) => {
     e.preventDefault();
     if (state.email === "" || state.password === "") {
@@ -39,9 +37,7 @@ const Login = (props) => {
     clienteAxios
       .post("/User/login", state)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
-          console.log(res);
           userLog(res.data.token, res.data.admin);
 
           props.history.push("/Contactos");

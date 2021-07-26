@@ -3,7 +3,7 @@ import Header from "./Header";
 import clienteAxios from "../config/axios";
 
 import NewContact from "./NewContactModal";
-import { Link, NavLink, Redirect } from "react-router-dom";
+
 import useUser from "../hooks/useUser";
 import ListOfContacts from "./listOfContacts";
 import EditContact from "./EditContact";
@@ -15,7 +15,7 @@ const Contactos = (props) => {
   const [result, setResult] = useState(contactos);
   const [noContacts, setNoContacts] = useState(false);
   const [modal, setModal] = useState(false);
-  const [editModal,setEditModal]=useState(false)
+  const [editModal, setEditModal] = useState(false);
   const { isLogged, logOut } = useUser();
   const [count, setCount] = useState([]);
   const [deleteArray, setdeleteArray] = useState([]);
@@ -24,18 +24,19 @@ const Contactos = (props) => {
   const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
-    console.log("desde use effect");
     clienteAxios
       .get("/Contactos")
       .then((res) => {
-        setcontactos(res.data.buscarContactos);
-        setResult(res.data.buscarContactos);
-      })
-      .catch((err) => {
-        if (err) {
+     
+        if (res.data.status === 200) {
+          setcontactos(res.data.buscarContactos);
+          setResult(res.data.buscarContactos);
+        } else {
+        
           setNoContacts(true);
         }
-      });
+      })
+      .catch((err) => console.log(err));
   }, []);
   useEffect(() => {
     if (allCheckbox === true) {
@@ -97,29 +98,29 @@ const Contactos = (props) => {
   function searcher(e) {
     let value = e.target.value;
     let find = [];
-    console.log(value);
+
     find = result.filter((eachResult) => {
-      console.log(eachResult);
       const inputValue = e.target.value.toLowerCase().replace(/\s/g, "");
       const name = eachResult.nombre.toLowerCase().replace(/\s/g, "");
       const lastname = eachResult.apellido.toLowerCase();
       const country = eachResult.pais[0].nombre.toLowerCase();
       const position = eachResult.cargo.toLowerCase();
-      const city=eachResult.ciudad[0].nombre.toLowerCase()
-      const email=eachResult.email.toLowerCase()
-      const company=eachResult.compañia[0].nombre.toLowerCase().replace(/\s/g, "");
-      const fullname= name + lastname
-      const region=eachResult.region[0].nombre.toLowerCase()
+      const city = eachResult.ciudad[0].nombre.toLowerCase();
+      const email = eachResult.email.toLowerCase();
+      const company = eachResult.compañia[0].nombre
+        .toLowerCase()
+        .replace(/\s/g, "");
+      const fullname = name + lastname;
+      const region = eachResult.region[0].nombre.toLowerCase();
       return (
         name.includes(inputValue) ||
         lastname.includes(inputValue) ||
         country.includes(inputValue) ||
         position.includes(inputValue) ||
         city.includes(inputValue) ||
-        email.includes(inputValue)||
-        company.includes(inputValue)||
-        fullname.includes(inputValue)
-        ||
+        email.includes(inputValue) ||
+        company.includes(inputValue) ||
+        fullname.includes(inputValue) ||
         region.includes(inputValue)
       );
     });
@@ -160,7 +161,9 @@ const Contactos = (props) => {
         </div>
       ) : null}
       {modal === true ? <NewContact modal={modal} setModal={setModal} /> : null}
-      {editModal === true ? <EditContact modal={modal} setModal={setModal} /> : null}
+      {editModal === true ? (
+        <EditContact modal={modal} setModal={setModal} />
+      ) : null}
       {noContacts === true ? (
         <div id="noContacts-container">
           {" "}
@@ -177,7 +180,7 @@ const Contactos = (props) => {
                   type="checkbox"
                   value="checkedAll"
                   onChange={handleClick}
-                  checked={allCheckbox}
+                  checked={allCheckbox }
                 ></input>
               </label>
             ) : (
@@ -187,7 +190,7 @@ const Contactos = (props) => {
                   type="hidden"
                   value="checkedAll"
                   onChange={handleClick}
-                  checked={allCheckbox}
+                  checked={allCheckbox }
                 ></input>
               </label>
             )}

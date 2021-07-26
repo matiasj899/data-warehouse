@@ -1,10 +1,9 @@
-import React,{useState} from "react";
-import UsuariosForm from "./UsuariosForm";
+import React, { useState } from "react";
+
 import clienteAxios from "../config/axios";
 
-const EditUser = ({editModal,setEditModal ,userId}) => {
-    console.log(userId)
-    const [error, guardarError] = useState(false);
+const EditUser = ({ editModal, setEditModal, userId }) => {
+  const [error, guardarError] = useState(false);
   const [loginError, guardarloginError] = useState(false);
   const [repeatPassword, setrepeatPassword] = useState("");
   const [passwordError, setpasswordError] = useState(false);
@@ -29,7 +28,6 @@ const EditUser = ({editModal,setEditModal ,userId}) => {
     });
   }
   function actualizarAdmin(e) {
-    
     if (e.target.value === "true") {
       newUser.admin = true;
     }
@@ -37,7 +35,7 @@ const EditUser = ({editModal,setEditModal ,userId}) => {
   function secondPassword(e) {
     setrepeatPassword(e.target.value);
   }
-  
+
   function handleClick(e) {
     e.preventDefault();
     if (
@@ -67,8 +65,8 @@ const EditUser = ({editModal,setEditModal ,userId}) => {
       })
       .catch((error) => console.log(error));
   }
-  function closeEditModal(){
-    setEditModal(false)
+  function closeEditModal() {
+    setEditModal(false);
   }
   return (
     <>
@@ -76,18 +74,15 @@ const EditUser = ({editModal,setEditModal ,userId}) => {
         <div className="modal-content edit-user">
           <div className="login-container user-section">
             <div className="login-box edit-user">
-            <div className="button-cn">
+              <div className="button-cn">
                 <button onClick={closeEditModal}>
-                    <div className="cross-img"></div>
+                  <div className="cross-img"></div>
                 </button>
-                </div>
-                <div className="title-and-cross-cn">
+              </div>
+              <div className="title-and-cross-cn">
                 <h2>Editar usuario</h2>
-                
-              
-             
-                </div>
-                
+              </div>
+
               <div className="forms-container user-section edit-user">
                 <form>
                   <label htmlFor="nombre">

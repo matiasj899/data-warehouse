@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import useUser from "../hooks/useUser";
 const Header = () => {
   const isAdmin = window.sessionStorage.getItem("admin");
-  console.log(isAdmin);
+
   const { isLogged, logOut } = useUser();
 
   function cerrarSesion() {
     logOut();
-    console.log("cerrando sesion");
   }
 
   if (!isLogged) {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import clienteAxios from "../config/axios";
 const UsuariosForm = ({ axiosConfig }) => {
   const [error, guardarError] = useState(false);
-  const [loginError, guardarloginError] = useState(false);
+  const [loginError , guardarloginError] = useState(false); 
   const [repeatPassword, setrepeatPassword] = useState("");
   const [passwordError, setpasswordError] = useState(false);
 
@@ -53,7 +53,7 @@ const UsuariosForm = ({ axiosConfig }) => {
     clienteAxios
       .post("/User/signup", newUser, axiosConfig)
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           window.location.reload();
         }
       })

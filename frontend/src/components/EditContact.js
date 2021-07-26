@@ -40,14 +40,14 @@ const EditContact = (props) => {
     clienteAxios
       .get("/Region")
       .then((res) => {
-        console.log(res);
+        
         setRegion(res.data.allRegions);
       })
       .catch((error) => console.log(error));
     clienteAxios
       .get("/Company")
       .then((res) => {
-        console.log(res);
+        
         setCompany(res.data.allCompanies);
       })
       .catch((error) => console.log(error));
@@ -69,7 +69,7 @@ const EditContact = (props) => {
     });
     setCountryForm(true);
   }
-  console.log(contact);
+  
   function selectCountry(e) {
     const countryId = country.filter(
       (eachCountry) => eachCountry._id === e.target.value
@@ -100,7 +100,7 @@ const EditContact = (props) => {
     });
   }
 
-  console.log(contact);
+  
   const regions = region.map((eachRegion) => {
     return (
       <option key={eachRegion._id} value={eachRegion._id}>

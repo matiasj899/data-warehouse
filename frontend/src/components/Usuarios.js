@@ -64,29 +64,12 @@ const Usuarios = (props) => {
   return (
     <div>
       <Header></Header>
-      {/* {selected ? (
-        <div className="select-and-delete">
-          <div className="selected-items-cn">
-            <p className="selected-items-p">{count} seleccionados</p>
-          </div>
-          <button className="selected-items-p" onClick={deleteUser}>
-            Eliminar contactos
-          </button>
-        </div>
-      ) : null} */}
 
       <ul className="ul-Container">
         <li className="users-li">
           <h2>Usuarios</h2>
         </li>
         <li className="list first-row">
-          {/* <label>
-            <input
-              type="checkbox"
-              onChange={handleClick}
-              checked={allCheckbox}
-            ></input>
-          </label> */}
           <div className="name-email-cn user">
             <h2>Nombre</h2>
           </div>

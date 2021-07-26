@@ -1034,3 +1034,8 @@ nav ul li:hover {
     /* margin: 10px; */
     justify-content: flex-end;
 }
+#noCompany-cn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

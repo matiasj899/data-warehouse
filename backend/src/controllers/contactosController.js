@@ -15,7 +15,7 @@ const verContactos = async (req, res) => {
         msj: "Todos los contactos.",
       });
     } else {
-      res.status(400).json({
+      res.status(200).json({
         status: 400,
         msj: "No se han encontrado contactos.",
       });
