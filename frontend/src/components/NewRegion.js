@@ -14,7 +14,7 @@ const NewRegion = ({ modal, setModal, jwt }) => {
     setModal(false);
   }
   function createRegion(e) {
-    console.log(e.target.value);
+   
     setRegion({ ...region, [e.target.name]: e.target.value });
   }
   function handleClick(e) {

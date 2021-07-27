@@ -22,6 +22,8 @@ const Contactos = (props) => {
   const [selected, setSelected] = useState(false);
   const [allCheckbox, setAllCheckbox] = useState(false);
   const [hidden, setHidden] = useState(true);
+  const [region, setRegion] = useState([]);
+  const [company, setCompany] = useState([]);
 
   useEffect(() => {
     clienteAxios
@@ -37,6 +39,20 @@ const Contactos = (props) => {
         }
       })
       .catch((err) => console.log(err));
+      clienteAxios
+      .get("/Region")
+      .then((res) => {
+        
+        setRegion(res.data.allRegions);
+      })
+      .catch((error) => console.log(error));
+    clienteAxios
+      .get("/Company")
+      .then((res) => {
+       
+        setCompany(res.data.allCompanies);
+      })
+      .catch((error) => console.log(error));
   }, []);
   useEffect(() => {
     if (allCheckbox === true) {

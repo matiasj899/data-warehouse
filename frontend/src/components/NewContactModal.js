@@ -31,12 +31,14 @@ const NewContact = ({ modal, setModal }) => {
     clienteAxios
       .get("/Region")
       .then((res) => {
+        
         setRegion(res.data.allRegions);
       })
       .catch((error) => console.log(error));
     clienteAxios
       .get("/Company")
       .then((res) => {
+       
         setCompany(res.data.allCompanies);
       })
       .catch((error) => console.log(error));

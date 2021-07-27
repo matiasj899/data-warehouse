@@ -5,6 +5,7 @@ import NewRegion from "./NewRegion";
 import RegionComponent from "./RegionComponent";
 const RegionCiudad = () => {
   const [data, setData] = useState([]);
+  const [noRegion,setNoRegion]=useState(false)
   const jwt = window.sessionStorage.getItem("jwt");
   useEffect(() => {
     clienteAxios
@@ -12,7 +13,8 @@ const RegionCiudad = () => {
       .then((res) => {
         setData(res.data.allRegions);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+    setNoRegion(true)});
   }, []);
 
   const [modal, setModal] = useState(false);
@@ -30,6 +32,13 @@ const RegionCiudad = () => {
           Agregar region
         </button>
       </div>
+      {noRegion?(<div id="noCompany-cn">
+          <div id="noContacts-container">
+            <p className="noContacts-message">
+              Aun no hay regiones, crea una.
+            </p>
+          </div>
+        </div>):null}
       {regionData}
       {modal === true ? (
         <NewRegion modal={modal} setModal={setModal} jwt={jwt}></NewRegion>

@@ -1,0 +1,21 @@
+[{
+    "_id": {
+      "$oid": "609a9ff8f7119c027c920073"
+    },
+    "nombre": "admin",
+    "apellido": "admin",
+    "email": "admin@gmail.com",
+    "password": "$2b$10$rGx4jTlmP5U2Mge8iLlq6eEdheWC23g5OA/3eWZoKEZbR7AXqKlAu",
+    "admin": true,
+    "__v": 0
+  },{
+    "_id": {
+      "$oid": "60ff4c0fa37c693e34bf3a06"
+    },
+    "nombre": "Acamica",
+    "apellido": "Acamica",
+    "email": "Acamica@gmail.com",
+    "password": "$2b$10$oz4PpLZU4RoxMNH6aMp24uvQunx7/DitaXpOPKjlviVqxHo.jjbDa",
+    "admin": false,
+    "__v": 0
+  }]
