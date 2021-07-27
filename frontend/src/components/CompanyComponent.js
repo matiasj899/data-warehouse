@@ -66,6 +66,9 @@ const CompanyComponent = ({ company, data }) => {
     clienteAxios
       .put(`/Company/${companyId}`, value)
       .then((res) => {
+        if(res.status == 200){
+          window.location.reload();
+        }
       })
       .catch((error) => console.log(error));
   }
